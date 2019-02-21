@@ -6,7 +6,7 @@
     "author_name": "MR Python",
     "author_email": "example@gmail.com",
     "command_line_interface": ["Click", "No command-line interface"],
-    "supported_python_versions": "2.7.13 3.6.2",
+    "supported_python_versions": "2.7.13 3.4.6 3.5.3 3.6.2",
 
     "doc_service": ["rtd", "s3"],
     "doc_rtd_project_name": "{{ cookiecutter.package_name }}",

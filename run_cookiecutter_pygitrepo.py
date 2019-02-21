@@ -22,7 +22,6 @@ extra_context = dict(
 
 
 if __name__ == "__main__":
-    sys.stdout.write(here)
     cookiecutter(
         here,
         extra_context=extra_context,

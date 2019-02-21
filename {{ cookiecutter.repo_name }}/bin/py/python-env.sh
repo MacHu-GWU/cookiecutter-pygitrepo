@@ -8,8 +8,8 @@ DIR_BIN="$(dirname "${DIR_HERE}")"
 DIR_PROJECT_ROOT=$(dirname "${DIR_BIN}")
 
 source ${DIR_BIN}/settings.sh
-source ${DIR_BIN}/lib/detect-os.sh
-source ${DIR_BIN}/lib/helpers.sh
+source ${DIR_BIN}/source/detect-os.sh
+source ${DIR_BIN}/source/helpers.sh
 
 
 # Virtualenv Name
