@@ -14,6 +14,8 @@ Release and Version History
 
 **Bugfixes**
 
+- fix ``envlist = py27, py36`` in tox.ini (it was ``envlist = 2.7, 3.6``)
+
 **Miscellaneous**
 
 
