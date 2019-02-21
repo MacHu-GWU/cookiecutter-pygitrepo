@@ -17,7 +17,7 @@
 Cookiecutter PyGitRepo
 ==============================================================================
 
-``cookiecutter-pygitrepo`` is a `cookiecutter <https://github.com/audreyr/cookiecutter>`_ template for
+``cookiecutter-pygitrepo`` is a `cookiecutter <https://github.com/audreyr/cookiecutter>`_ template for Python / pip installable / AWS Lambda Project.
 
 It is to replace my other project template library `pygitrepo <https://github.com/MacHu-GWU/pygitrepo-project>`_.
 
@@ -36,7 +36,7 @@ Create and Remove virtualenv::
     # remove virtualenv
     make remove
 
-Install your library and Run Test:
+Install your library and Run Test::
 
     # run test with pytest
     make test
@@ -49,7 +49,11 @@ Install your library and Run Test:
 
 Automatical Integration with `Travis-CI <https://travis-ci.org/>`_ and `Codecov <https://codecov.io/>`_. Configuration free.
 
-Build Document with auto-generated API reference:
+Auto format your source code and test code style into pep8::
+
+    make reformat
+
+Build Document with auto-generated API reference::
 
     # build sphinx html document site
     make build-doc
@@ -60,23 +64,25 @@ Build Document with auto-generated API reference:
     # deploy your doc website to s3
     make deploy-doc
 
-Want to publish to `Python Package Index <www.pypi.org>`_ ?, Let's do:
+Want to publish to `Python Package Index <www.pypi.org>`_ ?, Let's do::
 
     make publish
 
-Run jupyter nootbook:
+Run jupyter nootbook::
 
     make notebook
 
-It is a AWS Lambda function project? Maybe you want to build a AWS Lambda Runtime compatible deployment package (require `docker <https://www.docker.com/>`_).
+It is a AWS Lambda function project? Maybe you want to build a AWS Lambda Runtime compatible (Linux) deployment package (require `docker <https://www.docker.com/>`_)::
 
     make lbd-build-and-upload-deploy-pkg
 
-Usage:
+
+Usage
+------------------------------------------------------------------------------
 
 .. code-block:: bash
 
-    cd <to-any-dir>
+    cd <to-any-dir-for-example-your-github-dir>
     git clone https://github.com/MacHu-GWU/cookiecutter-pygitrepo.git
     python ./cookiecutter-pygitrepo/run_cookiecutter_pygitrepo.py
 

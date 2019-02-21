@@ -1,7 +1,7 @@
 #!/bin/bash
 # -*- coding: utf-8 -*-
 #
-# Clean up all temp information
+# Clean up all temp dir and files (except virtualenv)
 
 DIR_HERE="$( cd "$(dirname "$0")" ; pwd -P )"
 DIR_BIN="$(dirname "${DIR_HERE}")"
@@ -18,6 +18,7 @@ tmp_to_remove_list=(
     ${PATH_DIST_DIR}
     ${PATH_EGG_DIR}
     ${PATH_PYTEST_CACHE_DIR}
+    ${PATH_SPHINX_DOC_BUILD}
     ${PATH_LAMBDA_DEPLOY_PKG_FILE}
 )
 
@@ -26,17 +27,3 @@ do
     echo "remove ${tmp_path}"
     rm_if_exists ${PATH_COVERAGE_ANNOTATE_DIR}
 done
-
-#rm_if_exists ${PATH_COVERAGE_ANNOTATE_DIR}
-#
-#echo "remove ${PATH_COVERAGE_ANNOTATE_DIR}"
-#rm_if_exists ${PATH_TOX_DIR}
-#
-#echo "remove ${PATH_COVERAGE_ANNOTATE_DIR}"
-#rm_if_exists ${PATH_BUILD_DIR}
-#
-#echo "remove ${PATH_COVERAGE_ANNOTATE_DIR}"
-#rm_if_exists ${PATH_DIST_DIR}
-#rm_if_exists ${PATH_EGG_DIR}
-#rm_if_exists ${PATH_PYTEST_CACHE_DIR}
-#rm_if_exists ${PATH_LAMBDA_DEPLOY_PKG_FILE}

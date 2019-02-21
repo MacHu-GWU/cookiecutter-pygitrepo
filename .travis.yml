@@ -17,6 +17,8 @@ script:
   - make test
   - make cov
   - make tox
+  - make build-doc
+  - make reformat
 
 notifications:
   email: false # Mute email notification
