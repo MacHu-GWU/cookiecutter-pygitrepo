@@ -1,6 +1,21 @@
+
+.. image:: https://travis-ci.org/MacHu-GWU/cookiecutter-pygitrepo.svg?branch=master
+    :target: https://travis-ci.org/MacHu-GWU/cookiecutter-pygitrepo?branch=master
+
+------
+
+.. image:: https://img.shields.io/badge/Link-GitHub-blue.svg
+      :target: https://github.com/MacHu-GWU/cookiecutter-pygitrepo
+
+.. image:: https://img.shields.io/badge/Link-Submit_Issue-blue.svg
+      :target: https://github.com/MacHu-GWU/cookiecutter-pygitrepo/issues
+
+.. image:: https://img.shields.io/badge/Link-Request_Feature-blue.svg
+      :target: https://github.com/MacHu-GWU/cookiecutter-pygitrepo/issues
+
+
 Cookiecutter PyGitRepo
 ==============================================================================
-
 
 ``cookiecutter-pygitrepo`` is a `cookiecutter <https://github.com/audreyr/cookiecutter>`_ template for
 

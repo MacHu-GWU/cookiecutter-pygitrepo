@@ -12,6 +12,7 @@ install:
 script:
   - python ./test.py
   - cd ./learn_cc-project
+  - make info
   - make up
   - make test
   - make cov
