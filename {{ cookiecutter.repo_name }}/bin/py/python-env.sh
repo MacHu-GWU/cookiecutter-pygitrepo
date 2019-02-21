@@ -150,7 +150,7 @@ then
     resolve_windows_venv ${VENV_NAME} ${PY_VERSION_MAJOR_AND_MINOR}
 elif [ "${OS_IS_DARWIN}" = "Y" ]
 then
-    BIN_GLOBAL_PYTHON="${HOME}/.pyenv/versions/${PY_VERSION}/bin/python"
+    BIN_GLOBAL_PYTHON="$(which python)"
     if [ "$USE_PYENV" = "Y" ]
     then
         resolve_mac_pyenv ${VENV_NAME} ${PY_VERSION} ${PY_VERSION_MAJOR_AND_MINOR}
@@ -160,7 +160,7 @@ then
 
 elif [ "${OS_IS_LINUX}" = "Y" ]
 then
-    BIN_GLOBAL_PYTHON="${HOME}/.pyenv/versions/${PY_VERSION}/bin/python"
+    BIN_GLOBAL_PYTHON="$(which python)"
     resolve_linux_venv ${VENV_NAME} ${PY_VERSION} ${PY_VERSION_MAJOR_AND_MINOR}
 fi
 
