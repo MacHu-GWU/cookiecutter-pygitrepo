@@ -1,0 +1,7 @@
+pathlib_mate    # autopep8 your code
+twine>=1.5.0    # make distribution archive
+
+{%- if cookiecutter.is_aws_lambda_project == "Yes" %}
+# AWS
+boto3           # AWS Python SDK
+{%- endif %}

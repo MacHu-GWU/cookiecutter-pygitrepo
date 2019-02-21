@@ -1,0 +1,22 @@
+language: python
+
+python:
+{%- set supported_python_versions_for_travis_yml = cookiecutter.supported_python_versions.split(" ") %}
+{%- for py_ver in supported_python_versions_for_travis_yml %}
+{%- set major, minor, micro = py_ver.split(".") %}
+  - "{{ [major, minor] | join('.') }}"
+{%- endfor %}
+
+install:
+  - pip install --editable . # Install it self
+  - pip install -r requirements-test.txt # Install test dependencies
+  - pip install codecov # Install coveralls
+
+script:
+  - pytest tests --cov={{ cookiecutter.package_name }} # Run unittest
+
+notifications:
+  email: false # Mute email notification
+
+after_success:
+  - codecov # travis-ci will transfer data to codecov after success

@@ -1,0 +1,23 @@
+{
+    "package_name": "a_python_package",
+    "repo_name": "{{ cookiecutter.package_name }}-project",
+    "github_username": "MR-Python",
+
+    "author_name": "MR Python",
+    "author_email": "example@gmail.com",
+    "command_line_interface": ["Click", "No command-line interface"],
+    "supported_python_versions": "2.7.13 3.6.2",
+
+    "doc_service": ["rtd", "s3"],
+    "doc_rtd_project_name": "{{ cookiecutter.package_name }}",
+    "doc_host_s3_bucket_name": "a-s3-bucket-name",
+
+    "is_aws_lambda_project": ["No", "Yes"],
+
+    "_dev_py_ver_major": "",
+    "_dev_py_ver_minor": "",
+    "_dev_py_ver_micro": "",
+    "_dev_py_ver_full": "",
+    "_current_year": "",
+    "_current_date": ""
+}
