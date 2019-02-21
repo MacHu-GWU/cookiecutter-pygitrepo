@@ -16,8 +16,12 @@ extra_context = dict(
     command_line_interface="Click",
     supported_python_versions="2.7.13 3.6.2",
     doc_service="s3",
+    doc_host_aws_profile_name="sanhe",
     doc_host_s3_bucket_name="sanherabbit.com",
     is_aws_lambda_project="Yes",
+    lambda_aws_profile_name="sanhe",
+    lambda_deployment_s3_bucket_name="sanhe-learn-aws-lambda-with-sls-deploy",
+    use_pyenv="N",
 
     _dev_py_ver_major=sys.version_info.major,
     _dev_py_ver_minor=sys.version_info.minor,
