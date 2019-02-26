@@ -1,15 +1,15 @@
 #!/bin/bash
 # -*- coding: utf-8 -*-
 
-DIR_HERE="$( cd "$(dirname "$0")" ; pwd -P )"
-DIR_BIN="$(dirname "${DIR_HERE}")"
-DIR_PROJECT_ROOT=$(dirname "${DIR_BIN}")
+dir_here="$( cd "$(dirname "$0")" ; pwd -P )"
+dir_bin="$(dirname "${dir_here}")"
+dir_project_root=$(dirname "${dir_bin}")
 
-source ${DIR_BIN}/py/python-env.sh
+source ${dir_bin}/py/python-env.sh
 
-print_colored_line $color_cyan "[DOING] remove ${DIR_VENV} for ${VENV_NAME} ..."
-if [ ${USE_PYENV} == "Y" ]; then
-    pyenv uninstall -f ${VENV_NAME}
+print_colored_line $color_cyan "[DOING] remove ${dir_venv} for ${venv_name} ..."
+if [ ${use_pyenv} == "Y" ]; then
+    pyenv uninstall -f ${venv_name}
 else
-    rm_if_exists ${DIR_VENV}
+    rm_if_exists ${dir_venv}
 fi

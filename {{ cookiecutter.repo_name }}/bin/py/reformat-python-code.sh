@@ -1,14 +1,15 @@
 #!/bin/bash
 # -*- coding: utf-8 -*-
+#
 # Apply pep8 (https://www.python.org/dev/peps/pep-0008/)
 # to source code and tests
 # using https://pypi.org/project/autopep8
 
-DIR_HERE="$( cd "$(dirname "$0")" ; pwd -P )"
-DIR_BIN="$(dirname "${DIR_HERE}")"
-DIR_PROJECT_ROOT=$(dirname "${DIR_BIN}")
+dir_here="$( cd "$(dirname "$0")" ; pwd -P )"
+dir_bin="$(dirname "${dir_here}")"
+dir_project_root=$(dirname "${dir_bin}")
 
-source ${DIR_BIN}/py/python-env.sh
+source ${dir_bin}/py/python-env.sh
 
-print_colored_line $color_cyan "[DOING] reformat python code style, execute ${PATH_AUTO_PEP8_SCRIPT} ..."
-${BIN_PYTHON} ${PATH_AUTO_PEP8_SCRIPT}
+print_colored_line $color_cyan "[DOING] reformat python code style, execute ${path_auto_pep8_script} ..."
+${bin_python} ${path_auto_pep8_script}

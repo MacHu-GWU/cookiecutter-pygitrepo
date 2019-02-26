@@ -12,32 +12,32 @@
 
 if [ "${OS}" = "Windows_NT" ]
 then
-    DETECTED_OS="Windows"
+    detected_os="Windows"
 else
-    DETECTED_OS=$(uname -s)
+    detected_os=$(uname -s)
 fi
 
-if [ "${DETECTED_OS}" = "Windows" ]
+if [ "${detected_os}" = "Windows" ]
 then
-    OS_IS_WINDOWS="Y"
-    OS_IS_DARWIN="N"
-    OS_IS_LINUX="N"
-    OPEN_COMMAND="start"
-elif [ "${DETECTED_OS}" = "Darwin" ]
+    os_is_windows="Y"
+    os_is_darwin="N"
+    os_is_linux="N"
+    open_command="start"
+elif [ "${detected_os}" = "Darwin" ]
 then
-    OS_IS_WINDOWS="N"
-    OS_IS_DARWIN="Y"
-    OS_IS_LINUX="N"
-    OPEN_COMMAND="open"
-elif [ "${DETECTED_OS}" = "Linux" ]
+    os_is_windows="N"
+    os_is_darwin="Y"
+    os_is_linux="N"
+    open_command="open"
+elif [ "${detected_os}" = "Linux" ]
 then
-    OS_IS_WINDOWS="N"
-    OS_IS_DARWIN="N"
-    OS_IS_LINUX="Y"
-    OPEN_COMMAND="open"
+    os_is_windows="N"
+    os_is_darwin="N"
+    os_is_linux="Y"
+    open_command="open"
 else
-    OS_IS_WINDOWS="N"
-    OS_IS_DARWIN="N"
-    OS_IS_LINUX="N"
-    OPEN_COMMAND="unknown_open_command"
+    os_is_windows="N"
+    os_is_darwin="N"
+    os_is_linux="N"
+    open_command="unknown_open_command"
 fi

@@ -29,23 +29,21 @@ Things to do Next after generated the project skeleton:
     3. I recommend to use pyenv (https://github.com/pyenv/pyenv) 
         for python development on MacOS. If you also like pyenv, 
         set ``USE_PYENV="Y"`` in ``<repo_name>/bin/setting.sh``
+    4. Edit aws lambda specific setting in:
+        - ./bin/settings.sh : lambda deployment s3 bucket and aws profile
+        - ./serverless.yml : lambda execution role and layer ARN
 """
 
 
 if __name__ == '__main__':
+    if "{{ cookiecutter.doc_service }}" != "rtd":
+        remove_file_or_dir("readthedocs.yml")
 
     if "{{ cookiecutter.is_aws_lambda_project }}" != "Yes":
-        remove_file_or_dir("bin", "py", "lambda-env.sh")
-        remove_file_or_dir("bin", "py", "build-lbd-deploy-pkg.sh")
-        remove_file_or_dir("bin", "py", "build-lbd-deploy-pkg-in-container.sh")
+        remove_file_or_dir("bin", "lbd")
+        remove_file_or_dir("lbd-test.json")
 
     if "no" in "{{ cookiecutter.command_line_interface|lower }}":
         remove_file_or_dir("{{ cookiecutter.package_name }}", "cli.py")
 
     print(help_msg)
-    # help_file = os.path.join(os.path.dirname(__file__), "post-gen-help-info.txt")
-    # print(help_file)
-    # with open(help_file, "rb") as f:
-    #     text = f.read().decode("utf-8")
-    #     print(text)
-

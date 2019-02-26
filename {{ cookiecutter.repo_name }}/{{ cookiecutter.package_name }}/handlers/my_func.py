@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
 
 def handler(event, context):
-    return "Hello World!"
+    if event.get("name"):
+        return "Hello {}!".format(event.get("name"))
+    else:
+        return "Hello World!"

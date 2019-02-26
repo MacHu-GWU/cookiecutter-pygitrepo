@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+# all available properties in serverless.yml when provider is aws
+# https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/
+
+service:
+  name: {{ cookiecutter.package_slug }}
+
+provider:
+  name: aws
+  runtime: python{{ cookiecutter._dev_py_ver_major }}.{{ cookiecutter._dev_py_ver_minor }}
+  stage: dev
+  region: us-east-1
+  profile: {{ cookiecutter.lambda_aws_profile_name }}
+  memorySize: 128
+  timeout: 3
+  deploymentBucket:
+    name: {{ cookiecutter.lambda_deployment_s3_bucket_name }}
+  deploymentPrefix: serverless
+  role: {{ cookiecutter.lambda_execution_role_arn }}
+  versionFunctions: false
+
+package:
+  artifact: ./build/lambda/source.zip
+
+functions:
+  my_func:
+    handler: learn_awslambda.handlers.my_func.handler
+    description:
+    layers:
+      - {{ cookiecutter.lambda_layer_arn }}

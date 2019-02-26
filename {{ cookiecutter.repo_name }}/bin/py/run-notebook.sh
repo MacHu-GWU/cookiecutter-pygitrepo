@@ -3,12 +3,12 @@
 #
 # Run Jupyter notebook
 
-DIR_HERE="$( cd "$(dirname "$0")" ; pwd -P )"
-DIR_BIN="$(dirname "${DIR_HERE}")"
-DIR_PROJECT_ROOT=$(dirname "${DIR_BIN}")
+dir_here="$( cd "$(dirname "$0")" ; pwd -P )"
+dir_bin="$(dirname "${dir_here}")"
+dir_project_root=$(dirname "${dir_bin}")
 
-source ${DIR_BIN}/py/python-env.sh
+source ${dir_bin}/py/python-env.sh
 
 print_colored_line $color_cyan "[DOING] Run Jupyter Notebook locally ..."
-${BIN_PIP} install jupyter
-${BIN_JUPYTER} notebook
+${bin_pip} install jupyter
+${bin_jupyter} notebook

@@ -1,13 +1,13 @@
 #!/bin/bash
 # -*- coding: utf-8 -*-
 
-DIR_HERE="$( cd "$(dirname "$0")" ; pwd -P )"
-DIR_BIN="$(dirname "${DIR_HERE}")"
-DIR_PROJECT_ROOT=$(dirname "${DIR_BIN}")
+dir_here="$( cd "$(dirname "$0")" ; pwd -P )"
+dir_bin="$(dirname "${dir_here}")"
+dir_project_root=$(dirname "${dir_bin}")
 
-source ${DIR_BIN}/py/python-env.sh
+source ${dir_bin}/py/python-env.sh
 
-print_colored_line $color_cyan "[DOING] Run code coverage tests in ${PATH_TEST_DIR} ..."
-cd ${DIR_PROJECT_ROOT}
-rm -r ${PATH_COVERAGE_ANNOTATE_DIR}
-${BIN_PYTEST} ${PATH_TEST_DIR} -s --cov=${PACKAGE_NAME} --cov-report term-missing --cov-report annotate:${PATH_COVERAGE_ANNOTATE_DIR}
+print_colored_line $color_cyan "[DOING] Run code coverage tests in ${path_test_dir} ..."
+cd ${dir_project_root}
+rm -r ${path_coverage_annotate_dir}
+${bin_pytest} ${path_test_dir} -s --cov=${package_name} --cov-report term-missing --cov-report annotate:${path_coverage_annotate_dir}

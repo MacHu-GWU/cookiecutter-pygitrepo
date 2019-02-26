@@ -1,17 +1,17 @@
 #!/bin/bash
 # -*- coding: utf-8 -*-
 
-DIR_HERE="$( cd "$(dirname "$0")" ; pwd -P )"
-DIR_BIN="$(dirname "${DIR_HERE}")"
-DIR_PROJECT_ROOT=$(dirname "${DIR_BIN}")
+dir_here="$( cd "$(dirname "$0")" ; pwd -P )"
+dir_bin="$(dirname "${dir_here}")"
+dir_project_root=$(dirname "${dir_bin}")
 
-source ${DIR_BIN}/py/python-env.sh
+source ${dir_bin}/py/python-env.sh
 
-print_colored_line $color_cyan "[DOING] create virtualenv for ${VENV_NAME} at ${DIR_VENV} ..."
-if [ ${USE_PYENV} == "Y" ]; then
-    pyenv virtualenv ${PY_VERSION} ${VENV_NAME}
-    ${BIN_PIP} install --upgrade pip
+print_colored_line $color_cyan "[DOING] create virtualenv for ${venv_name} at ${dir_venv} ..."
+if [ ${use_pyenv} == "Y" ]; then
+    pyenv virtualenv ${py_version} ${venv_name}
+    ${bin_pip} install --upgrade pip
 else
-    virtualenv -p ${BIN_GLOBAL_PYTHON} ${DIR_VENV}
-    ${BIN_PIP} install --upgrade pip
+    virtualenv -p ${bin_global_python} ${dir_venv}
+    ${bin_pip} install --upgrade pip
 fi

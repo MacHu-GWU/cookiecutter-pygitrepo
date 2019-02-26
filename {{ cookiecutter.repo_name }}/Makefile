@@ -2,7 +2,7 @@
 
 
 help: ## ** Show this help message
-	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-40s\033[0m %s\n", $$1, $$2}'
+	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-40s\033[0m %s\n", $$1, $$2}'
 
 
 up: ## ** Set Up the Virtual Environment
@@ -115,12 +115,34 @@ info: ## ** Show information about python, pip in this environment
 {%- if cookiecutter.is_aws_lambda_project == "Yes" %}
 #--- AWS Lambda ---
 lbd-build-deploy-pkg: ## Build lambda deployment package
-	bash ./bin/py/build-lbd-deploy-pkg.sh
+	bash ./bin/lbd/build-lbd-deploy-pkg.sh
 
 
-lbd-upload-deploy-pkg: ## Upload lambda deployment package to s3
-	bash ./bin/py/upload-lbd-deploy-pkg.sh
+lbd-build-layer: ## Build lambda layer
+	bash ./bin/lbd/build-lbd-layer.sh
 
 
-lbd-build-and-upload-deploy-pkg: lbd-build-deploy-pkg lbd-upload-deploy-pkg ## Build and upload lambda deployment package to s3
+lbd-build-source: ## Build lambda source code
+	bash ./bin/lbd/build-lbd-source-code.sh
+
+
+lbd-build-everything: ## Build lambda deployment package, layer, and source code
+	bash ./bin/lbd/build-lbd-everything.sh
+
+
+lbd-upload-everything: ## Upload lambda deployment package, layer, and source code to s3
+	bash ./bin/lbd/upload-lbd-everything.sh
+
+
+lbd-deploy-layer: ## Deploy lambda dependencies layer
+	bash ./bin/lbd/deploy-lbd-layer.sh
+
+
+lbd-deploy-all-func: lbd-build-source ## Deploy all lambda funtcions
+	bash ./bin/lbd/deploy-lbd-all-func.sh
+
+
+lbd-info: ## Display Lambda Relative Info
+	bash ./bin/lbd/info-lbd.sh
+
 {%- endif %}

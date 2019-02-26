@@ -32,6 +32,14 @@ rm_if_exists() {
 }
 
 
+ensure_not_exists() {
+    if [ -e $1 ]; then
+        echo "${1} already exists!"
+        exit 1
+    fi
+}
+
+
 color_normal="\e[39m"
 color_black="\e[30m"
 color_red="\e[31m"
@@ -56,7 +64,17 @@ color_white="\e[97m"
 #
 #   print_colored_line $color_red "Warning!"
 print_colored_line() {
-    local TMP_COLOR=$1
-    local TMP_TEXT=$2
-    printf -- "${TMP_COLOR}${TMP_TEXT}${color_normal}\n"
+    local tmp_color=$1
+    local tmp_text=$2
+    printf -- "${tmp_color}${tmp_text}${color_normal}\n"
+}
+
+# print title, and description, title is colored
+# usage:
+#   print_colored_line $color_red "GitHub Url" "www.github.com"
+print_colored_ref_line() {
+    local tmp_title_color=$1
+    local tmp_title=$2
+    local tmp_description=$3
+    printf -- "- ${tmp_title_color}${tmp_title}${color_normal}: ${tmp_description}\n"
 }

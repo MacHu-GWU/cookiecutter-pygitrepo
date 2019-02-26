@@ -1,11 +1,11 @@
 #!/bin/bash
 # -*- coding: utf-8 -*-
 
-DIR_HERE="$( cd "$(dirname "$0")" ; pwd -P )"
-DIR_BIN="$(dirname "${DIR_HERE}")"
-DIR_PROJECT_ROOT=$(dirname "${DIR_BIN}")
+dir_here="$( cd "$(dirname "$0")" ; pwd -P )"
+dir_bin="$(dirname "${dir_here}")"
+dir_project_root=$(dirname "${dir_bin}")
 
-source ${DIR_BIN}/py/python-env.sh
+source ${dir_bin}/py/python-env.sh
 
-print_colored_line $color_cyan "[DOING] remove ${PATH_SPHINX_DOC_BUILD} ..."
-rm -r ${PATH_SPHINX_DOC_BUILD}
+print_colored_line $color_cyan "[DOING] remove ${path_sphinx_doc_build} ..."
+rm -r ${path_sphinx_doc_build}

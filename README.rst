@@ -72,12 +72,30 @@ Run jupyter nootbook::
 
     make notebook
 
-It is a AWS Lambda function project? Maybe you want to build a AWS Lambda Runtime compatible (Linux) deployment package (require `docker <https://www.docker.com/>`_)::
 
-    make lbd-build-and-upload-deploy-pkg
+AWS Lambda Relative Features
+------------------------------------------------------------------------------
+
+It is a AWS Lambda function project? Maybe you want to build a **AWS Lambda Runtime compatible (Linux) deployment package** (require `docker <https://www.docker.com/>`_)::
+
+    make lbd-build-everything
+
+You can **simulate lambda invoke locally with custom event data** like this::
+
+    bash ./bin/lbd/invoke my_func ./lbd-test-event.json
+
+`layers <https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html>`_ can **minimize your build / deploy process to fewer second**. You can build the dependencies once, and deploy it everywhere. Just do::
+
+    make lbd-build-layer
+    make lbd-upload-everything
+    make lbd-deploy-layer
+
+**Continues deployment is easy**, just do this when it passed the Continues Integration. It use `severless framework <https://serverless.com/>`_ to manage aws infrastructure and configurations::
+
+    make lbd-deploy-all-func
 
 
-Usage
+Usage: Generate Project Skeleton
 ------------------------------------------------------------------------------
 
 .. code-block:: bash
@@ -88,6 +106,77 @@ Usage
 
 Note:
 
-    since it use extra_context to inject runtime data such as today's date to the main context, this won't work properly::
+    since it use extra_context to inject runtime data such as today's date to the main context, **this won't work properly**::
 
         cookiecutter https://github.com/MacHu-GWU/cookiecutter-pygitrepo.git
+
+
+Description
+------------------------------------------------------------------------------
+
+notation:
+
+- <tmp>: indicate that this directory / file are temporarily generated, and should not be included in the repo.
+
+::
+
+    <repo_name>
+    |-- bin
+        |-- py                  # python environment bin tools and shell scripts
+        |-- lbd                 # aws lambda bin tools and shell scripts
+        |-- source              # common shell scripts functions
+        |-- settings.sh
+    |-- build                   # <tmp>
+        |-- lambda              # <tmp> for aws lambda function deployment
+            |-- source.zip      # <tmp> source code only
+            |-- deploy-pkg.zip  # <tmp> source code + dependencies
+            |-- layer.zip       # <tmp> dependencies layer
+            |-- site-packages   # <tmp> local lambda runtime sandbox, will be used in container
+    |-- docs
+        |-- build               # <tmp>
+            |-- html            # <tmp>
+        |-- source
+            |-- _static
+                |-- css
+                |-- js
+                |-- .custom-style.rst
+                |-- xxx-favicon.ico
+                |-- xxx-logo.png
+            |-- conf.py
+            |-- index.rst
+            |-- release-history.rst
+        |-- make.bat
+        |-- Makefile
+    |-- <package_name>
+        |-- docs
+            |-- __init__.py
+        |-- handlers
+            |-- __init__.py
+            |-- lambda_function1.py
+            |-- lambda_function2.py
+            |-- ...
+        |-- __init__.py
+        |-- cli.py
+        |-- _version.py
+    |-- tests
+        |-- all.py              # invoke all test from python script
+        |-- test_xxx.py
+    |-- .coveragerc
+    |-- .gitattributes
+    |-- .gitignore
+    |-- .travis.yml
+    |-- AUTHORS.rst
+    |-- fix_code_style.py
+    |-- LICENSE.txt
+    |-- Makefile                # quick access
+    |-- MANIFEST.in
+    |-- README.rst
+    |-- readthedocs.yml
+    |-- release-history.rst
+    |-- requirements.txt
+    |-- requirements-dev.txt
+    |-- requirements-doc.txt
+    |-- requirements-test.txt
+    |-- serverless.yml          # aws lambda configuration
+    |-- setup.py
+    |-- tox.ini

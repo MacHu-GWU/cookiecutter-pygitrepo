@@ -4,13 +4,28 @@ Release and Version History
 ==============================================================================
 
 
-0.0.2 (TODO)
+0.0.3 (TODO)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+**Minor Improvements**
+
+**Bugfixes**
+
+**Miscellaneous**
+
+
+0.0.2 (2019-02-26)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
 - AWS Lambda devops tools with `serverless <https://serverless.com/>`_.
+- continues deployment tools with ``make lbd-deploy-all-func``
+- local invoke environment with ``bash ./bin/lbd/invoke.sh my_func ./lbd-test-event.json``
 
 **Minor Improvements**
+
+- all shell variable are now lower cased.
 
 **Bugfixes**
 

@@ -3,17 +3,21 @@
 #
 # Publish this Package to https://pypi.org/
 
-DIR_HERE="$( cd "$(dirname "$0")" ; pwd -P )"
-DIR_BIN="$(dirname "${DIR_HERE}")"
-DIR_PROJECT_ROOT=$(dirname "${DIR_BIN}")
+dir_here="$( cd "$(dirname "$0")" ; pwd -P )"
+dir_bin="$(dirname "${dir_here}")"
+dir_project_root=$(dirname "${dir_bin}")
 
-source ${DIR_BIN}/py/python-env.sh
+source ${dir_bin}/py/python-env.sh
 
-print_colored_line $color_cyan "[DOING] Publish ${PACKAGE_NAME} to https://pypi.org ..."
-rm -r ${DIR_PROJECT_ROOT}/build ${DIR_PROJECT_ROOT}/dist ${DIR_PROJECT_ROOT}/${PACKAGE_NAME}.egg-info
+print_colored_line $color_cyan "[DOING] Publish ${package_name} to https://pypi.org ..."
+rm_if_exists path_build_dir
+rm_if_exists path_dist_dir
+rm_if_exists path_egg_dir
 (
-    cd ${DIR_PROJECT_ROOT};
-    ${BIN_PYTHON} setup.py sdist bdist_wheel --universal;
-    ${BIN_TWINE} upload dist/*;
+    cd ${dir_project_root};
+    ${bin_python} setup.py sdist bdist_wheel --universal;
+    ${bin_twine} upload dist/*;
 )
-rm -r ${DIR_PROJECT_ROOT}/build ${DIR_PROJECT_ROOT}/dist ${DIR_PROJECT_ROOT}/${PACKAGE_NAME}.egg-info
+rm_if_exists path_build_dir
+rm_if_exists path_dist_dir
+rm_if_exists path_egg_dir

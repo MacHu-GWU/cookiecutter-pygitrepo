@@ -1,34 +1,32 @@
 #!/bin/bash
 # -*- coding: utf-8 -*-
 
-DIR_HERE="$( cd "$(dirname "$0")" ; pwd -P )"
-DIR_BIN="$(dirname "${DIR_HERE}")"
-DIR_PROJECT_ROOT=$(dirname "${DIR_BIN}")
+dir_here="$( cd "$(dirname "$0")" ; pwd -P )"
+dir_bin="$(dirname "${dir_here}")"
+dir_project_root=$(dirname "${dir_bin}")
 
-source ${DIR_BIN}/py/python-env.sh
+source ${dir_bin}/py/python-env.sh
 
 print_colored_line $color_cyan "[DOING] print useful information:"
-if [ -e ${DIR_VENV} ]; then
-    print_colored_line $color_green "virtualenv is ready to use at: ${DIR_VENV}"
+if [ -e ${dir_venv} ]; then
+    print_colored_line $color_green "virtualenv is ready to use at: ${dir_venv}"
 else
-    print_colored_line $color_red "virtualenv are NOT found at: ${DIR_VENV}"
+    print_colored_line $color_red "virtualenv are NOT found at: ${dir_venv}"
 fi
 
-if [ -z "$(${BIN_PIP} show ${PACKAGE_NAME} | grep "Name:")" ]; then
-    print_colored_line $color_red "${PACKAGE_NAME} is NOT installed at: ${DIR_VENV_SITE_PACKAGES}"
+if [ -z "$(${bin_pip} show ${package_name} | grep "Name:")" ]; then
+    print_colored_line $color_red "${package_name} is NOT installed at: ${dir_venv_site_packages}"
 else
-    print_colored_line $color_green "${PACKAGE_NAME} is installed at: ${DIR_VENV_SITE_PACKAGES}"
+    print_colored_line $color_green "${package_name} is installed at: ${dir_venv_site_packages}"
 fi
 
-printf -- "\n-\e[36m venv:\e[39m ${DIR_VENV}"
-printf -- "\n-\e[36m python executable:\e[39m ${BIN_PYTHON}"
-printf -- "\n-\e[36m pip executable:\e[39m ${BIN_PIP}"
-printf -- "\n-\e[36m site-packages:\e[39m ${DIR_VENV_SITE_PACKAGES}"
-printf -- "\n-\e[36m site-packages64:\e[39m ${DIR_VENV_SITE_PACKAGES64}"
-printf -- "\n-\e[36m local html doc:\e[39m ${PATH_SPHINX_INDEX_HTML}"
-printf -- "\n-\e[36m readme:\e[39m ${PATH_README}"
-
-#echo - document on rtd: ${RTD_DOC_URL}
-#echo - document on s3: ${AWS_DOC_URL}
-
-echo ""
+print_colored_ref_line ${color_cyan} "venv" ${dir_venv}
+print_colored_ref_line ${color_cyan} "python executable" ${bin_python}
+print_colored_ref_line ${color_cyan} "pip executable" ${bin_pip}
+print_colored_ref_line ${color_cyan} "site-packages" ${dir_venv_site_packages}
+print_colored_ref_line ${color_cyan} "site-packages64" ${dir_venv_site_packages64}
+print_colored_ref_line ${color_cyan} "local html doc" ${path_sphinx_index_html}
+print_colored_ref_line ${color_cyan} "readme file" ${path_readme}
+print_colored_ref_line ${color_cyan} "versioned doc on s3" ${s3_uri_doc_versioned}
+print_colored_ref_line ${color_cyan} "latest doc on s3" ${s3_uri_doc_latest}
+print_colored_ref_line ${color_cyan} "latest doc on readthedocs.org" ${rtd_url}
