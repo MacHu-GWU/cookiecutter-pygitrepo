@@ -1,6 +1,6 @@
 {
     "package_name": "a_python_package",
-    "package_slug": "{{ cookiecutter.package_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "package_slug": "{{ cookiecutter.package_name.lower().replace(' ', '-').replace('_', '-') }}",
     "repo_name": "{{ cookiecutter.package_name }}-project",
     "github_username": "MR-Python",
 
@@ -18,7 +18,7 @@
     "lambda_aws_profile_name": "an-aws-profile-name",
     "lambda_deployment_s3_bucket_name": "a-s3-bucket-name",
     "lambda_layer_arn": "lambda-layer-arn-edit-later",
-    "lambda_execution_role_arn": "arn:aws:iam::663351365541:role/learn_awslambda",
+    "lambda_execution_role_arn": "lambda-exeution-role-arn-edit-later",
 
     "use_pyenv": ["N", "Y"],
 
