@@ -142,7 +142,10 @@ lbd-deploy-all-func: lbd-build-source ## Deploy all lambda funtcions
 	bash ./bin/lbd/deploy-lbd-all-func.sh
 
 
+lbd-ls-func: ## List all lambda functions in this project
+	bash ./bin/lbd/list-functions.sh
+
+
 lbd-info: ## Display Lambda Relative Info
 	bash ./bin/lbd/info-lbd.sh
-
 {%- endif %}

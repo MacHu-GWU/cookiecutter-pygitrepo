@@ -162,6 +162,12 @@ get_handler() {
 }
 
 
+# List all lambda functions in this project
+list_functions() {
+    ls "${dir_project_root}/${package_name}/handlers" | grep "^[^_]" | grep ".py$" | sed 's/\.[^.]*$//'
+}
+
+
 # Run lambda function in container locally with custom event data
 #
 # usage:
