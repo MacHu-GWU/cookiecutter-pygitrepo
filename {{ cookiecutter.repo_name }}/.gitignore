@@ -91,6 +91,11 @@ celerybeat-schedule
 venv/
 ENV/
 
+{% if cookiecutter.is_aws_lambda_project == "Yes" %}
+# serverless
+.serverless/
+{% endif %}
+
 # Spyder project settings
 .spyderproject
 
