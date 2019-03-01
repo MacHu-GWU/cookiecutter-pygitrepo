@@ -43,6 +43,7 @@ if __name__ == '__main__':
         remove_file_or_dir("bin", "lbd")
         remove_file_or_dir("lbd-test-event.json")
         remove_file_or_dir("serverless.yml")
+        remove_file_or_dir("{{ cookiecutter.package_name }}/handlers")
 
     if "no" in "{{ cookiecutter.command_line_interface|lower }}":
         remove_file_or_dir("{{ cookiecutter.package_name }}", "cli.py")
