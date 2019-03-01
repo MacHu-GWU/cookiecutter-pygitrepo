@@ -62,8 +62,14 @@ build_lbd_dependencies_layer() {
     print_colored_line $color_cyan "create dependencies layer"
     ensure_not_exists ${path_lambda_layer_file}
     print_colored_line $color_cyan "  zip everything in ${dir_venv_site_packages} except ${package_name}"
-    cd ${dir_venv_site_packages}
-    zip ${path_lambda_layer_file} * -r -9 -q -x boto3\* botocore\* setuptools\* easy_install.py pip\* wheel\* twine\* _pytest\* pytest\* ${package_name}\*;
+
+    tmp_dir="/tmp/cookiecutter-pygitrepo/${package_name}"
+    tmp_dir_layer="${tmp_dir}/layer"
+    mkdir_if_not_exists ${tmp_dir_layer}
+    cp -r ${dir_venv_site_packages} "${tmp_dir_layer}/python"
+    cd ${tmp_dir_layer}
+    zip ${path_lambda_layer_file} * -r -9 -q -x python/boto3\* python/botocore\* python/setuptools\* python/easy_install.py python/pip\* python/wheel\* python/twine\* python/_pytest\* python/pytest\* python/${package_name}\*;
+    rm_if_exists ${tmp_dir}
 }
 
 

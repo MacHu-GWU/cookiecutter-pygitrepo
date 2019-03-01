@@ -32,6 +32,15 @@ rm_if_exists() {
 }
 
 
+# if a dir not exists, then create it and all necessary parent dir.
+mkdir_if_not_exists() {
+    if ! [ -e $1 ]; then
+        mkdir -p $1
+    fi
+}
+
+
+# exit if not exists
 ensure_not_exists() {
     if [ -e $1 ]; then
         echo "${1} already exists!"

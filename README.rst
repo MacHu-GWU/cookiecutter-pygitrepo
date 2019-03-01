@@ -180,3 +180,12 @@ notation:
     |-- serverless.yml          # aws lambda configuration
     |-- setup.py
     |-- tox.ini
+
+
+Dev Guide
+------------------------------------------------------------------------------
+
+Everytime made change to ``{{ cookiecutter.repo_name }}``
+
+1. Run ``dev.py``, generate ``learn_awslambda-project`` repo.
+2. Test with ``make xxx`` command.
