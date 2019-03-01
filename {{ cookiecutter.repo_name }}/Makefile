@@ -44,16 +44,14 @@ req-test: ## Install Test Dependencies
 
 
 #--- Test ---
-test: pip-dev-install req-test ## ** Run test
-	bash ./bin/py/test.sh
+test: req-test pip-dev-install test-only ## ** Run test
 
 
 test-only: ## Run test without checking test dependencies
 	bash ./bin/py/test.sh
 
 
-cov: pip-dev-install req-test ## ** Run Code Coverage test
-	bash ./bin/py/test-cov.sh
+cov: req-test pip-dev-install cov-only ## ** Run Code Coverage test
 
 
 cov-only: ## Run Code Coverage test without checking test dependencies
@@ -65,12 +63,12 @@ tox: ## Run multi python version test with tox
 
 
 #--- Document ---
-build-doc-only: ## Build Documents, skip check doc dependencies, skip clean existing doc
-	bash ./bin/py/build-doc-only.sh
-
-
 build-doc: req-doc pip-dev-install ## ** Build Documents, start over
 	bash ./bin/py/build-doc.sh
+
+
+build-doc-only: ## Build Documents, skip check doc dependencies, skip clean existing doc
+	bash ./bin/py/build-doc-only.sh
 
 
 view-doc: ## ** Open Html Document
@@ -101,7 +99,7 @@ reformat: req-dev ## ** Pep8 Format Python Source Code
 	bash ./bin/py/reformat-python-code.sh
 
 
-publish: req-dev ## ** Publish This Package to PyPI
+publish: req-dev pip-dev-install ## ** Publish This Package to PyPI
 	bash ./bin/py/publish-to-pypi.sh
 
 

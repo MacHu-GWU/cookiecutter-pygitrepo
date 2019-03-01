@@ -10,14 +10,14 @@ dir_project_root=$(dirname "${dir_bin}")
 source ${dir_bin}/py/python-env.sh
 
 print_colored_line $color_cyan "[DOING] Publish ${package_name} to https://pypi.org ..."
-rm_if_exists path_build_dir
-rm_if_exists path_dist_dir
-rm_if_exists path_egg_dir
+rm_if_exists $path_build_dir
+rm_if_exists $path_dist_dir
+rm_if_exists $path_egg_dir
 (
     cd ${dir_project_root};
     ${bin_python} setup.py sdist bdist_wheel --universal;
     ${bin_twine} upload dist/*;
 )
-rm_if_exists path_build_dir
-rm_if_exists path_dist_dir
-rm_if_exists path_egg_dir
+rm_if_exists $path_build_dir
+rm_if_exists $path_dist_dir
+rm_if_exists $path_egg_dir
