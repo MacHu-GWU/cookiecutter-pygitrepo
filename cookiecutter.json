@@ -27,5 +27,6 @@
     "_dev_py_ver_micro": "",
     "_dev_py_ver_full": "",
     "_current_year": "",
-    "_current_date": ""
+    "_current_date": "",
+    "_cookiecutter_pygitrepo_version": ""
 }

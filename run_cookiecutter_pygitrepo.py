@@ -7,6 +7,9 @@ from datetime import datetime, date
 from cookiecutter.main import cookiecutter
 
 here = os.path.dirname(__file__)
+with open(os.path.join(here, "version.txt"), "rb") as f:
+    cookiecutter_pygitrepo_version = f.read().decode("utf-8").strip()
+
 extra_context = dict(
     _dev_py_ver_major=sys.version_info.major,
     _dev_py_ver_minor=sys.version_info.minor,
@@ -18,6 +21,7 @@ extra_context = dict(
     ),
     _current_year=datetime.now().year,
     _current_date=str(date.today()),
+    _cookiecutter_pygitrepo_version=cookiecutter_pygitrepo_version,
 )
 
 
