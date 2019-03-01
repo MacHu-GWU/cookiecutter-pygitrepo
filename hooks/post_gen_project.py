@@ -3,7 +3,7 @@
 import os
 import shutil
 
-REPO_DIR = os.path.dirname(os.path.dirname(__file__))
+REPO_DIR = os.path.realpath(os.path.curdir)
 
 
 def remove_file_or_dir(*parts):
@@ -41,7 +41,8 @@ if __name__ == '__main__':
 
     if "{{ cookiecutter.is_aws_lambda_project }}" != "Yes":
         remove_file_or_dir("bin", "lbd")
-        remove_file_or_dir("lbd-test.json")
+        remove_file_or_dir("lbd-test-event.json")
+        remove_file_or_dir("serverless.yml")
 
     if "no" in "{{ cookiecutter.command_line_interface|lower }}":
         remove_file_or_dir("{{ cookiecutter.package_name }}", "cli.py")

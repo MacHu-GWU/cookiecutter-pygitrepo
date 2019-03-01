@@ -19,9 +19,9 @@ supported_py_versions="{{ cookiecutter.supported_python_versions }}" # e.g: "2.7
 
 
 #--- Doc Build
-
 rtd_project_name="{{ cookiecutter.doc_rtd_project_name }}"
 
+{%- if cookiecutter.doc_service == "s3" %}
 # AWS profile name for hosting doc on S3
 # should be defined in ~/.aws/credentials
 # read https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html for more information
@@ -30,6 +30,7 @@ aws_profile_doc_host="{{ cookiecutter.doc_host_aws_profile_name }}"
 # html doc will be upload to:
 # "s3://${S3_BUCKET_DOC_HOST}/docs/${PACKAGE_NAME}/${PACKAGE_VERSION}"
 s3_bucket_doc_host="{{ cookiecutter.doc_host_s3_bucket_name }}"
+{%- endif %}
 
 {% if cookiecutter.is_aws_lambda_project == "Yes" %}
 #--- AWS Lambda
