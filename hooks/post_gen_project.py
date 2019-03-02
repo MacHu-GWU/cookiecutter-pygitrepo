@@ -45,7 +45,7 @@ if __name__ == '__main__':
         remove_file_or_dir("serverless.yml")
         remove_file_or_dir("{{ cookiecutter.package_name }}/handlers")
 
-    if "no" in "{{ cookiecutter.command_line_interface|lower }}":
+    if "{{ cookiecutter.command_line_interface }}".lower() != "click":
         remove_file_or_dir("{{ cookiecutter.package_name }}", "cli.py")
 
     print(help_msg)
