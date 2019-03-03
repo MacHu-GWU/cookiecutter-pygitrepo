@@ -141,6 +141,15 @@ lbd-deploy-layer: ## Deploy lambda dependencies layer
 	bash ./bin/lbd/deploy-lbd-layer.sh
 
 
+lbd-build-upload-deploy-layer:
+	bash ./bin/lbd/build-lbd-layer.sh
+	bash ./bin/lbd/upload-lbd-layer.sh
+	bash ./bin/lbd/deploy-lbd-layer.sh
+
+
+lbd-bud-layer: lbd-build-upload-deploy-layer ## Build, upload, deploy lambda dependencies layer
+
+
 lbd-deploy-all-func: lbd-build-source ## Deploy all lambda funtcions
 	bash ./bin/lbd/deploy-lbd-all-func.sh
 
