@@ -13,7 +13,7 @@ module_name = '{{ cookiecutter.package_name}}'
 if not re.match(MODULE_REGEX, module_name):
     msg = ('ERROR: The package name (%s) is not a valid Python package name. '
            'Please do not use a - and use _ instead, valid example: foo_bar' % module_name)
-
+    print(msg)
     #Exit to cancel project
     sys.exit(1)
 
