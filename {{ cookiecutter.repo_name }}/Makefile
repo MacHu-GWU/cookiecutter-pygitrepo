@@ -110,6 +110,11 @@ notebook: ## ** Run jupyter notebook
 info: ## ** Show information about python, pip in this environment
 	bash ./bin/py/info.sh
 
+
+req-info: ## Show requirements information
+	bash ./bin/py/req-info.sh
+
+
 {% if cookiecutter.is_aws_lambda_project == "Yes" %}
 #--- AWS Lambda ---
 lbd-build-deploy-pkg: ## Build lambda deployment package

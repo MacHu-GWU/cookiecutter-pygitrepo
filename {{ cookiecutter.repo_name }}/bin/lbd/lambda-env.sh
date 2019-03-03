@@ -40,6 +40,10 @@ s3_key_lambda_layer_file="${s3_key_lambda_deploy_repo_root}/layer/${package_vers
 s3_uri_lambda_layer_file="s3://${s3_bucket_lambda_deploy}/${s3_key_lambda_layer_file}"
 
 
+path_serverless_yml="${dir_project_root}/serverless.yml"
+path_serverless_cache_dir="${dir_project_root}/.serverless"
+
+
 build_lbd_deployment_package() {
     print_colored_line $color_cyan "create deploy package"
     ensure_not_exists ${path_lambda_deploy_pkg_file}

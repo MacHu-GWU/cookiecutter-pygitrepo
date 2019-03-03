@@ -179,8 +179,10 @@ fi
 package_version=$(python ${path_version_file})
 
 rtd_url="https://${rtd_project_name}.readthedocs.io/"
+rtd_project_url="https://readthedocs.org/projects/${package_name}/"
 s3_uri_doc_versioned="s3://${s3_bucket_doc_host}/docs/${package_name}/${package_version}"
 s3_uri_doc_latest="s3://${s3_bucket_doc_host}/docs/${package_name}/latest"
+s3_doc_url="${s3_bucket_doc_host}.s3.amazonaws.com/docs/${package_name}/latest/index.html"
 
 
 # Deploy sphinx generated html doc to s3 bucket
