@@ -15,7 +15,7 @@ with open(os.path.join(here, "version.txt"), "rb") as f:
     cookiecutter_pygitrepo_version = f.read().decode("utf-8").strip()
 
 extra_context = dict(
-    package_name="dev_exp_share",
+    package_name="learn_awslambda",
     github_username="MacHu-GWU",
     author_name="Sanhe Hu",
     author_email="husanhe@gmail.com",
@@ -24,7 +24,7 @@ extra_context = dict(
     doc_service="rtd",
     doc_host_aws_profile_name="sanhe",
     doc_host_s3_bucket_name="sanherabbit.com",
-    is_aws_lambda_project="No",
+    is_aws_lambda_project="Yes",
     lambda_aws_profile_name="sanhe",
     lambda_deployment_s3_bucket_name="sanhe-learn-aws-lambda-with-sls-deploy",
     lambda_layer_arn="",
