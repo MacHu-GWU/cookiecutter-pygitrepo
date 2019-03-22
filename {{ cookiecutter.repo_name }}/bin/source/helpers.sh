@@ -108,5 +108,5 @@ print_colored_ref_line() {
     local tmp_title_color=$1
     local tmp_title=$2
     local tmp_description=$3
-    printf -- "- $(colored_text "${tmp_title_color}" "${tmp_title}"): "${tmp_description}"\n"
+    printf -- "- $(colored_text "${tmp_title_color}" "${tmp_title}"): ${tmp_description}\n"
 }
