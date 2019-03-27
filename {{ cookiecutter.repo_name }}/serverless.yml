@@ -24,7 +24,7 @@ package:
 
 functions:
   my_func:
-    handler: learn_awslambda.handlers.my_func.handler
+    handler: {{ cookiecutter.package_name }}.handlers.my_func.handler
     description:
     layers:
       - {{ cookiecutter.lambda_layer_arn }}
