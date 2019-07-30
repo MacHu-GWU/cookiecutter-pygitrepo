@@ -26,17 +26,19 @@ path_lambda_deploy_pkg_file=${path_build_lambda_dir}/deploy-pkg.zip
 path_lambda_source_file=${path_build_lambda_dir}/source.zip
 path_lambda_layer_file=${path_build_lambda_dir}/layer.zip
 
-
+# example: https://s3.console.aws.amazon.com/s3/buckets/my-bucket/lambda/MacHu-GWU/cookiecutter-pygitrepo/
 aws_console_url_s3_lambda_deploy="https://s3.console.aws.amazon.com/s3/buckets/${s3_bucket_lambda_deploy}/lambda/${github_account}/${github_repo_name}/"
+
+# example: lambda/MacHu-GWU/cookiecutter-pygitrepo
 s3_key_lambda_deploy_repo_root="lambda/${github_account}/${github_repo_name}"
 
-s3_key_lambda_deploy_pkg_file="${s3_key_lambda_deploy_repo_root}/deploy-pkg/${package_version}.zip"
+s3_key_lambda_deploy_pkg_file="${s3_key_lambda_deploy_repo_root}/${package_version}/deploy-pkg.zip"
 s3_uri_lambda_deploy_pkg_file="s3://${s3_bucket_lambda_deploy}/${s3_key_lambda_deploy_pkg_file}"
 
-s3_key_lambda_source_file="${s3_key_lambda_deploy_repo_root}/source/${package_version}.zip"
+s3_key_lambda_source_file="${s3_key_lambda_deploy_repo_root}/${package_version}/source.zip"
 s3_uri_lambda_source_file="s3://${s3_bucket_lambda_deploy}/${s3_key_lambda_source_file}"
 
-s3_key_lambda_layer_file="${s3_key_lambda_deploy_repo_root}/layer/${package_version}.zip"
+s3_key_lambda_layer_file="${s3_key_lambda_deploy_repo_root}/${package_version}/layer.zip"
 s3_uri_lambda_layer_file="s3://${s3_bucket_lambda_deploy}/${s3_key_lambda_layer_file}"
 
 
@@ -50,7 +52,7 @@ build_lbd_deployment_package() {
     ensure_not_exists ${path_run_lambda_site_packages}
     print_colored_line $color_cyan "  zip everything in ${dir_venv_site_packages}"
     cd ${dir_venv_site_packages}
-    zip ${path_lambda_deploy_pkg_file} * -r -9 -q -x boto3\* botocore\* setuptools\* easy_install.py pip\* wheel\* twine\* _pytest\* pytest\*;
+    zip ${path_lambda_deploy_pkg_file} * -r -9 -q -x boto3\* botocore\* s3transfer\* setuptools\* easy_install.py pip\* wheel\* twine\* _pytest\* pytest\*;
     print_colored_line $color_cyan "  copy ${dir_venv_site_packages} to ${path_run_lambda_site_packages}"
     cp -r ${dir_venv_site_packages} ${path_run_lambda_site_packages}
 }
@@ -76,7 +78,7 @@ build_lbd_dependencies_layer() {
     mkdir_if_not_exists ${tmp_dir_layer}
     cp -r ${dir_venv_site_packages} "${tmp_dir_layer}/python"
     cd ${tmp_dir_layer}
-    zip ${path_lambda_layer_file} * -r -9 -q -x python/boto3\* python/botocore\* python/setuptools\* python/easy_install.py python/pip\* python/wheel\* python/twine\* python/_pytest\* python/pytest\* python/${package_name}\*;
+    zip ${path_lambda_layer_file} * -r -9 -q -x python/boto3\* python/botocore\* python/s3transfer\* python/setuptools\* python/easy_install.py python/pip\* python/wheel\* python/twine\* python/_pytest\* python/pytest\* python/${package_name}\*;
     rm_if_exists ${tmp_dir}
 }
 
