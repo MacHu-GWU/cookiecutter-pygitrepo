@@ -10,7 +10,7 @@
 # It uses Linux pre-built dependencies at <dir_project_root>/build/lambda/site-packages
 # So make sure you did "make lbd-build-deploy-pkg" first
 
-dir_here="$( cd "$(dirname "$0")" ; pwd -P )"
+dir_here="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 dir_bin="$(dirname "${dir_here}")"
 dir_project_root=$(dirname "${dir_bin}")
 
