@@ -49,6 +49,7 @@ s3_bucket_lambda_deploy="{{ cookiecutter.lambda_deployment_s3_bucket_name }}"
 # Docker
 # deployment package will be built in this container
 docker_image_for_build="lambci/lambda:build-python3.6"
+
 # this container will be used for testing lambda invoke
 docker_image_for_run="lambci/lambda:python3.6"
 dir_container_workspace="/var/task"

@@ -133,6 +133,18 @@ lbd-build-everything: ## Build lambda deployment package, layer, and source code
 	bash ./bin/lbd/build-lbd-everything.sh
 
 
+lbd-upload-deploy-pkg: ## Upload lambda deployment package to s3
+	bash ./bin/lbd/upload-lbd-deploy-pkg.sh
+
+
+lbd-upload-layer: ## Upload lambda dependencies layer to s3
+	bash ./bin/lbd/upload-lbd-layer.sh
+
+
+lbd-upload-source: ## Upload lambda source code to s3
+	bash ./bin/lbd/upload-lbd-source.sh
+
+
 lbd-upload-everything: ## Upload lambda deployment package, layer, and source code to s3
 	bash ./bin/lbd/upload-lbd-everything.sh
 
