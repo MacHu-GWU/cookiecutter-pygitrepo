@@ -18,6 +18,17 @@ layer_name="${package_name}"
 path_build_lambda_dir="${path_build_dir}/lambda"
 path_run_lambda_site_packages="${path_build_dir}/lambda/site-packages"
 
+# in circleci, it use the environment variable AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION
+# for aws cli
+if [ -z "$CIRCLECI" ]
+then
+    profile_arg="--profile ${aws_profile_for_lambda}"
+    sls_aws_profile_arg=""
+else
+    profile_arg="--aws-profile "${aws_profile_for_lambda}""
+    sls_aws_profile_arg=""
+fi
+
 
 # AWS Lambda now support layers, aws highly recommend that zip dependencies
 # as a layer, and only upload source code in your CI / CD
@@ -61,7 +72,7 @@ build_lbd_deployment_package() {
 upload_lbd_deployment_package() {
     if [ -e $path_lambda_deploy_pkg_file ]; then
         aws s3 cp ${path_lambda_deploy_pkg_file} ${s3_uri_lambda_deploy_pkg_file} \
-            --profile ${aws_profile_for_lambda}
+            ${profile_arg}
     else
         print_colored_line $color_light_red "${path_lambda_deploy_pkg_file} not found"
     fi
@@ -86,7 +97,7 @@ build_lbd_dependencies_layer() {
 upload_lbd_dependencies_layer() {
     if [ -e $path_lambda_layer_file ]; then
         aws s3 cp ${path_lambda_layer_file} ${s3_uri_lambda_layer_file} \
-            --profile ${aws_profile_for_lambda}
+            ${profile_arg}
     else
         print_colored_line $color_light_red "${path_lambda_layer_file} not found"
     fi
@@ -105,7 +116,7 @@ build_lbd_source_code() {
 upload_lbd_source_code() {
     if [ -e $path_lambda_source_file ]; then
         aws s3 cp ${path_lambda_source_file} ${s3_uri_lambda_source_file} \
-            --profile ${aws_profile_for_lambda}
+            ${profile_arg}
     else
         print_colored_line $color_light_red "${path_lambda_source_file} not found"
     fi
@@ -126,7 +137,7 @@ deploy_layer() {
         --description "layer for functions in ${layer_name}" \
         --content "S3Bucket=${s3_bucket_lambda_deploy},S3Key=${s3_key_lambda_layer_file}" \
         --compatible-runtimes "python${py_version_major_and_minor}" \
-        --profile ${aws_profile_for_lambda}
+        ${profile_arg}
 }
 
 
@@ -138,7 +149,7 @@ get_role_arn() {
         exit 1
     fi
     aws iam list-roles \
-            --profile ${aws_profile_for_lambda} | jq ".Roles[] | select(.RoleName == \"$tmp_role_name\").Arn"
+            ${profile_arg} | jq ".Roles[] | select(.RoleName == \"$tmp_role_name\").Arn"
 }
 
 
@@ -149,7 +160,7 @@ get_layer_arn() {
         exit 1
     fi
     aws lambda list-layers \
-        --profile ${aws_profile_for_lambda} | jq ".Layers[] | select(.LayerName == \"$tmp_layer_name\") | .LatestMatchingVersion.LayerVersionArn"
+        ${profile_arg} | jq ".Layers[] | select(.LayerName == \"$tmp_layer_name\") | .LatestMatchingVersion.LayerVersionArn"
 }
 
 
@@ -234,7 +245,7 @@ create_function() {
         --timeout 3 \
         --memory-size 128 \
         --environment Variables="{KeyName1=string1,KeyName2=string2}" \
-        --profile ${aws_profile_for_lambda}
+        ${profile_arg}
 }
 
 
@@ -245,7 +256,7 @@ update_function_code() {
         --function-name ${tmp_function_name} \
         --s3-bucket ${s3_bucket_lambda_deploy} \
         --s3-key ${s3_key_lambda_deploy_pkg_file} \
-        --profile ${aws_profile_for_lambda}
+        ${profile_arg}
 }
 
 
@@ -253,7 +264,7 @@ deploy_function() {
     local tmp_function_name=$1
     local tmp_execution_role=$2
 
-    tmp=$(aws lambda get-function --function-name ${tmp_function_name} --profile ${aws_profile_for_lambda})
+    tmp=$(aws lambda get-function --function-name ${tmp_function_name} ${profile_arg})
     if [ $? -eq 0 ]; then
         update_function_code ${tmp_function_name}
     else
