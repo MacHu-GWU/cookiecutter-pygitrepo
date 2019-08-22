@@ -166,12 +166,16 @@ then
     else
         resolve_mac_venv ${venv_name} ${py_version} ${py_version_major_and_minor}
     fi
-
 elif [ "${os_is_linux}" = "Y" ]
 then
     bin_global_python="python${py_ver_major}.${py_ver_minor}"
     bin_global_python="$(which ${bin_global_python})"
-    resolve_linux_venv ${venv_name} ${py_version} ${py_version_major_and_minor}
+    if [ "${use_pyenv}" = "Y" ]
+    then
+        resolve_linux_pyenv ${venv_name} ${py_version} ${py_version_major_and_minor}
+    else
+        resolve_linux_venv ${venv_name} ${py_version} ${py_version_major_and_minor}
+    fi
 fi
 
 
