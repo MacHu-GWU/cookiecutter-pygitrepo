@@ -39,11 +39,15 @@ if __name__ == '__main__':
     if "{{ cookiecutter.doc_service }}" != "rtd":
         remove_file_or_dir("readthedocs.yml")
 
-    if "{{ cookiecutter.is_aws_lambda_project }}" != "Yes":
+    if "{{ cookiecutter.is_aws_lambda_project }}" != "Y":
         remove_file_or_dir("bin", "lbd")
         remove_file_or_dir("lbd-test-event.json")
         remove_file_or_dir("serverless.yml")
         remove_file_or_dir("{{ cookiecutter.package_name }}/handlers")
+
+    if "{{ cookiecutter.is_aws_cloudformation_project }}" != "Y":
+        remove_file_or_dir("{{ cookiecutter.package_name }}/cf")
+        remove_file_or_dir("{{ cookiecutter.package_name }}/devops")
 
     if "{{ cookiecutter.command_line_interface }}".lower() != "click":
         remove_file_or_dir("{{ cookiecutter.package_name }}", "cli.py")

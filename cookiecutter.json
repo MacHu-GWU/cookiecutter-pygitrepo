@@ -11,14 +11,15 @@
 
     "doc_service": ["rtd", "s3"],
     "doc_rtd_project_name": "{{ cookiecutter.package_name }}",
-    "doc_host_aws_profile_name": "an-aws-profile-name",
+    "doc_host_aws_profile_name": "{{ cookiecutter.main_aws_profile }}",
     "doc_host_s3_bucket_name": "a-s3-bucket-name",
 
-    "is_aws_lambda_project": ["No", "Yes"],
-    "lambda_aws_profile_name": "an-aws-profile-name",
-    "lambda_deployment_s3_bucket_name": "a-s3-bucket-name",
-    "lambda_layer_arn": "lambda-layer-arn-edit-later",
-    "lambda_execution_role_arn": "lambda-exeution-role-arn-edit-later",
+    "is_aws_project": ["N", "Y"],
+    "aws_profile_name": "an-aws-project-name",
+    "deployment_s3_bucket_name": "a-s3-bucket-name",
+
+    "is_aws_lambda_project": "{{ cookiecutter.is_aws_project }}",
+    "is_aws_cloudformation_project": "{{ cookiecutter.is_aws_project }}",
 
     "use_pyenv": ["N", "Y"],
 

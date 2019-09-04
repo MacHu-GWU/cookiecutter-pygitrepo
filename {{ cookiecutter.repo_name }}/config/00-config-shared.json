@@ -1,3 +1,9 @@
 {
-    "PROJECT_NAME": "{{ cookiecutter.package_name }}"
+    "PROJECT_NAME": "{{ cookiecutter.package_name }}",
+    "AWS_PROFILE_FOR_DOC_DEPLOY": "{{ cookiecutter.doc_host_aws_profile_name }}",
+    "S3_BUCKET_FOR_DOC_HOST": "{{ cookiecutter.doc_host_s3_bucket_name }}",
+    {% if cookiecutter.is_aws_project == "Y" %}
+    "AWS_PROFILE_FOR_DEPLOY": "{{ cookiecutter.aws_profile_name }}",
+    "S3_BUCKET_FOR_DEPLOY": "{{ cookiecutter.deployment_s3_bucket_name }}"
+    {% endif %}
 }

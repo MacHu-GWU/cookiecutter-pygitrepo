@@ -10,13 +10,13 @@ provider:
   runtime: python{{ cookiecutter._dev_py_ver_major }}.{{ cookiecutter._dev_py_ver_minor }}
   stage: dev
   region: us-east-1
-  profile: {{ cookiecutter.lambda_aws_profile_name }}
+  profile: {{ cookiecutter.aws_profile_name }}
   memorySize: 128
   timeout: 3
   deploymentBucket:
-    name: {{ cookiecutter.lambda_deployment_s3_bucket_name }}
+    name: {{ cookiecutter.deployment_s3_bucket_name }}
   deploymentPrefix: serverless
-  role: {{ cookiecutter.lambda_execution_role_arn }}
+  role: "<put-your-own-lambda-iam-role-arn-here>"
   versionFunctions: false
 
 package:
@@ -27,4 +27,4 @@ functions:
     handler: {{ cookiecutter.package_name }}.handlers.my_func.handler
     description:
     layers:
-      - {{ cookiecutter.lambda_layer_arn }}
+      - "<put-your-own-lambda-layers-arn-here>"

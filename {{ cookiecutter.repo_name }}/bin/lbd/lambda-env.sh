@@ -12,23 +12,11 @@ dir_here="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 dir_bin="$(dirname "${dir_here}")"
 dir_project_root=$(dirname "${dir_bin}")
 
-source ${dir_bin}/py/python-env.sh
+source ${dir_bin}/aws/aws-env.sh
 
 layer_name="${package_name}"
 path_build_lambda_dir="${path_build_dir}/lambda"
 path_run_lambda_site_packages="${path_build_dir}/lambda/site-packages"
-
-# in circleci, it use the environment variable AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION
-# for aws cli
-if [ -z "$CIRCLECI" ]
-then
-    profile_arg="--profile ${aws_profile_for_lambda}"
-    sls_aws_profile_arg=""
-else
-    profile_arg="--aws-profile "${aws_profile_for_lambda}""
-    sls_aws_profile_arg=""
-fi
-
 
 # AWS Lambda now support layers, aws highly recommend that zip dependencies
 # as a layer, and only upload source code in your CI / CD

@@ -13,8 +13,8 @@ dir_project_root=$(dirname "${dir_bin}")
 
 source ${dir_bin}/settings.sh
 source ${dir_bin}/source/detect-os.sh
+source ${dir_bin}/source/detect-runtime.sh
 source ${dir_bin}/source/helpers.sh
-
 
 # Virtualenv Name
 venv_name="${package_name}_venv"

@@ -115,7 +115,7 @@ req-info: ## Show requirements information
 	bash ./bin/py/req-info.sh
 
 
-{% if cookiecutter.is_aws_lambda_project == "Yes" %}
+{% if cookiecutter.is_aws_lambda_project == "Y" %}
 #--- AWS Lambda ---
 lbd-build-deploy-pkg: ## Build lambda deployment package
 	bash ./bin/lbd/build-lbd-deploy-pkg.sh
