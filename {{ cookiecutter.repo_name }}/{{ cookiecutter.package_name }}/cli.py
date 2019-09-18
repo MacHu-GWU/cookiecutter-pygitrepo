@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
-"""Console script for {{cookiecutter.package_name}}."""
+"""
+Console script for {{cookiecutter.package_name}}.
+"""
+
 import sys
 import click
 

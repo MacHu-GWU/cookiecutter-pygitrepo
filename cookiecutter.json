@@ -5,13 +5,13 @@
     "github_username": "MR-Python",
 
     "author_name": "MR Python",
-    "author_email": "example@gmail.com",
+    "author_email": "example@email.com",
     "command_line_interface": ["Click", "No command-line interface"],
     "supported_python_versions": "2.7.13 3.4.6 3.5.3 3.6.2",
 
     "doc_service": ["rtd", "s3"],
     "doc_rtd_project_name": "{{ cookiecutter.package_name }}",
-    "doc_host_aws_profile_name": "{{ cookiecutter.main_aws_profile }}",
+    "doc_host_aws_profile_name": "an-aws-project-name",
     "doc_host_s3_bucket_name": "a-s3-bucket-name",
 
     "is_aws_project": ["N", "Y"],
