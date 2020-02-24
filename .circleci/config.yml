@@ -24,12 +24,12 @@ jobs:
       - run:
           name:
           command: |
-            pip install -r requirements.txt # install cookiecutter
+            sudo pip install -r requirements.txt # install cookiecutter
           no_output_timeout: "30s"
 
 workflows:
   version: 2
-  my-workflow:
+  build_and_test:
     jobs:
       - check_out_source_code
       - test_pypi_project:
