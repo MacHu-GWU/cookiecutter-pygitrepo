@@ -17,7 +17,7 @@
 Cookiecutter PyGitRepo
 ==============================================================================
 
-``cookiecutter-pygitrepo`` is a `cookiecutter <https://github.com/audreyr/cookiecutter>`_ template for Python / pip installable / AWS Lambda Project.
+``cookiecutter-pygitrepo`` is a `cookiecutter <https://github.com/audreyr/cookiecutter>`_ template for Python / pip installable / AWS Project.
 
 It is to replace my other project template library `pygitrepo <https://github.com/MacHu-GWU/pygitrepo-project>`_.
 
