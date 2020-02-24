@@ -8,31 +8,43 @@ stop_test_if_failed() {
     fi
 }
 
-rm -r learn_cc-project
-python ./test.py
-cd ./learn_cc-project
+dir_here="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+rm -r "${dir_here}/a_pypi_library-project"
+
+python "${dir_here}/e1_pypi_library.py"
+
+cd "${dir_here}/a_pypi_library-project"
+
+echo "--- run: make remove"
 make remove
 stop_test_if_failed
 
+echo "--- run: make clean"
 make clean
 stop_test_if_failed
 
+echo "--- run: make info"
 make info
 stop_test_if_failed
 
+echo "--- run: make up"
 make up
 stop_test_if_failed
 
+echo "--- run: make pip-install"
 make pip-install
 stop_test_if_failed
 
+echo "--- run: make pip-uninstall"
 make pip-uninstall
 stop_test_if_failed
 
+echo "--- run: make pip-dev-install"
 make pip-dev-install
 stop_test_if_failed
 
+echo "--- run: make test"
 make test
 stop_test_if_failed
 
