@@ -37,6 +37,8 @@ aws_profile_doc_host="{{ cookiecutter.doc_host_aws_profile_name }}"
 
 # html doc will be upload to:
 # "s3://${S3_BUCKET_DOC_HOST}/docs/${PACKAGE_NAME}/${PACKAGE_VERSION}"
+# To know how to configure a AWS S3 bucket to host your static site, read this
+# official doc: https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
 s3_bucket_doc_host="{{ cookiecutter.doc_host_s3_bucket_name }}"
 {%- endif %}
 

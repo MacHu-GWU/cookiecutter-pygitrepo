@@ -11,7 +11,7 @@ stop_test_if_failed() {
 dir_here="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 rm -r "${dir_here}/a_pypi_library-project"
-
+#
 python "${dir_here}/e1_pypi_library.py"
 
 cd "${dir_here}/a_pypi_library-project"
@@ -48,37 +48,48 @@ echo "--- run: make test"
 make test
 stop_test_if_failed
 
+echo "--- run: make test-only"
 make test-only
 stop_test_if_failed
 
+echo "--- run: make cov"
 make cov
 stop_test_if_failed
 
+echo "--- run: make cov-only"
 make cov-only
 stop_test_if_failed
 
+echo "--- run: make info"
 make info
 stop_test_if_failed
 
+echo "--- run: make build-doc"
 make build-doc
 stop_test_if_failed
 
+echo "--- run: make clean-doc"
 make clean-doc
 stop_test_if_failed
 
+echo "--- run: make req-dev"
 make req-dev
 stop_test_if_failed
 
+echo "--- run: make req-test"
 make req-test
 stop_test_if_failed
 
+echo "--- run: make req-doc"
 make req-doc
 stop_test_if_failed
 
 # clean up everything
+echo "--- run: make remove"
 make remove
 stop_test_if_failed
 
+echo "--- run: make clean"
 make clean
 stop_test_if_failed
 

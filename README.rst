@@ -73,6 +73,50 @@ Run jupyter nootbook::
     make notebook
 
 
+**You can easily choose to generate the following tools for your project**.
+
+
+Python Library Project
+------------------------------------------------------------------------------
+
+
+
+DevOps Project (Optional, Required if a AWS Project)
+------------------------------------------------------------------------------
+
+It provides a Multi Environment config management tools out-of-the-box. It allows you to:
+
+1. define complex derivable config value logic.
+2. switch between configs between multiple environments like ``dev | test | prod``.
+3. read configs or sensitive data from any where securely. Like json or xml file from your local computer, from remote server, AWS Parameter store, AWS Secret Manager, database. Since it's python, you can do anything.
+4. inject configs value to any tools or systems. Like your web application, Terraform, Ansible, VM, Docker, anything.
+
+Magic happens in ``./config`` directory.
+
+
+AWS Project (Optional)
+------------------------------------------------------------------------------
+
+
+
+
+AWS Lambda Project
+------------------------------------------------------------------------------
+
+It provides bin tools allows you to easily to:
+
+- package your Lambda Source Code
+- build and upload AWS Layer Code
+
+
+
+AWS CloudFormation Project
+------------------------------------------------------------------------------
+
+It provides frameworks allows you to dynamically construct CloudFormation template and easily deploy it to multi-environment.
+
+
+
 AWS Lambda Relative Features
 ------------------------------------------------------------------------------
 

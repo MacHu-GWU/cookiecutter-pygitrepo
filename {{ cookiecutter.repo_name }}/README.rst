@@ -13,7 +13,7 @@
     :target: https://travis-ci.org/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}?branch=master
 
 .. image:: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/branch/master/graph/badge.svg
-  :target: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}
+    :target: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}
 
 .. image:: https://img.shields.io/pypi/v/{{ cookiecutter.package_name }}.svg
     :target: https://pypi.python.org/pypi/{{ cookiecutter.package_name }}
@@ -31,32 +31,32 @@
 
 {% if _doc_domain %}
 .. image:: https://img.shields.io/badge/Link-Document-blue.svg
-      :target: {{ _doc_domain }}/index.html
+    :target: {{ _doc_domain }}/index.html
 {% endif %}
 
 {%- if _doc_domain %}
 .. image:: https://img.shields.io/badge/Link-API-blue.svg
-      :target: {{ _doc_domain }}/py-modindex.html
+    :target: {{ _doc_domain }}/py-modindex.html
 {% endif %}
 
 {%- if _doc_domain %}
 .. image:: https://img.shields.io/badge/Link-Source_Code-blue.svg
-      :target: {{ _doc_domain }}/py-modindex.html
+    :target: {{ _doc_domain }}/py-modindex.html
 {% endif %}
 .. image:: https://img.shields.io/badge/Link-Install-blue.svg
-      :target: `install`_
+    :target: `install`_
 
 .. image:: https://img.shields.io/badge/Link-GitHub-blue.svg
-      :target: {{ _github_url }}
+    :target: {{ _github_url }}
 
 .. image:: https://img.shields.io/badge/Link-Submit_Issue-blue.svg
-      :target: {{ _github_url }}/issues
+    :target: {{ _github_url }}/issues
 
 .. image:: https://img.shields.io/badge/Link-Request_Feature-blue.svg
-      :target: {{ _github_url }}/issues
+    :target: {{ _github_url }}/issues
 
 .. image:: https://img.shields.io/badge/Link-Download-blue.svg
-      :target: https://pypi.org/pypi/{{ cookiecutter.package_name }}#files
+    :target: https://pypi.org/pypi/{{ cookiecutter.package_name }}#files
 
 
 Welcome to ``{{ cookiecutter.package_name }}`` Documentation

@@ -9,7 +9,7 @@ from cookiecutter.main import cookiecutter
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 extra_context = dict(
-    package_name="a_pypi_library",
+    package_name="a_devops_work",
     github_username="MacHu-GWU",
     author_name="Sanhe Hu",
     author_email="husanhe@gmail.com",
@@ -19,7 +19,7 @@ extra_context = dict(
     doc_host_aws_profile_name="sanhe",
     doc_host_s3_bucket_name="sanherabbit.com",
     is_aws_project="N",
-    want_devops_tools="N",
+    want_devops_tools="Y",
     aws_profile_name="",
     deployment_s3_bucket_name="",
     is_aws_lambda_project="N",
