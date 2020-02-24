@@ -87,9 +87,10 @@ def get_json_value(file_path, json_path):
 
 
 class Style(object):
-    RED = "\033[31m"
-    GREEN = "\033[32m"
-    CYAN = "\033[36m"
+    RED = "\033[31m"    # for error message
+    GREEN = "\033[32m"  # for success message
+    CYAN = "\033[36m"   # for information
+    RESET = "\033[39m"  # reset to default
 
 
 if __name__ == "__main__":

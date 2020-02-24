@@ -16,21 +16,26 @@ Usage:
 
 from __future__ import print_function
 import os
-import sys
 import shutil
-from os.path import join, dirname, basename, abspath, getmtime
+from os.path import join, dirname, abspath
 
 
 class Style(object):
-    RED = "\033[31m"
-    GREEN = "\033[32m"
-    CYAN = "\033[36m"
+    RED = "\033[31m"    # for error message
+    GREEN = "\033[32m"  # for success message
+    CYAN = "\033[36m"   # for information
+    RESET = "\033[39m"  # reset to default
+
 
 here = dirname(abspath(__file__))
 dst = join(here, "config-raw.json")
 
 
 def find_config_file_by_environment(environment):
+    """
+    suppose environment = "dev", then the first occurrence of a file name end
+    with "dev.json" should be the environment specified config file.
+    """
     for p_basename in os.listdir(here):
         if p_basename.endswith("{}.json".format(environment)):
             return join(here, p_basename)
@@ -38,28 +43,32 @@ def find_config_file_by_environment(environment):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) <= 1:
-        print(Style.RED + "You must specify environment name dev|test|prod as first arg, example:" \
-              + Style.GREEN + " ./{} dev".format(basename(__file__)))
-        exit(1)
+    import argparse
 
-    environment = sys.argv[1]
-    print(Style.CYAN + "switch to environment '{}' ... ".format(environment))
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "env",
+        type=str,
+        metavar="env",
+        nargs=1,
+        help="the environment name you want to switch to",
+    )
+
+    args = parser.parse_args()
+    args_data = vars(args)
+
+    environment = args_data["env"][0]
+    print(Style.CYAN + "switch to environment: " + Style.RESET + "'{}' ... ".format(environment))
     try:
         src = find_config_file_by_environment(environment)
     except EnvironmentError:
-        print(Style.RED + "unable to find any config file for '{}'".format(environment))
+        src = None
+        print(Style.RED + "unable to find any config file for " + Style.RESET + "'{}'".format(environment))
         exit(1)
 
-    print(Style.GREEN + "copy {}".format(src))
-    print(Style.GREEN + "   to {}".format(dst))
+    print(Style.CYAN + "copy: " + Style.RESET + src)
+    print(Style.CYAN + "   to: " + Style.RESET  + dst)
 
-    last_modify_time_before = getmtime(dst)
     shutil.copy(src, dst)
-    last_modify_time_after = getmtime(dst)
-    if last_modify_time_before == last_modify_time_after:
-        print(Style.RED + "failed!")
-        exit(1)
-    else:
-        print(Style.GREEN + "successfully switched to '{}' environment.".format(environment))
 
+    print(Style.GREEN + "successfully switched to: " + Style.RESET + "'{}'.".format(environment))
