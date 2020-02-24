@@ -1,6 +1,7 @@
 # User Settings
 learn_cc-project/
 learn_awslambda-project/
+tests/**/
 
 
 # Byte-compiled / optimized / DLL files
