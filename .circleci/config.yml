@@ -1,0 +1,37 @@
+use_python368_docker: &use_python368_docker
+  docker:
+    - image: circleci/python:3.6.8
+
+
+version: 2
+jobs:
+  # Check out source code and cache
+  check_out_source_code:
+    <<: *use_python368_docker
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: .
+          paths:
+              - .
+
+  # General Python Library Open Source Project
+  test_pypi_project:
+    <<: *use_python368_docker
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name:
+          command: |
+            pip install -r requirements.txt # install cookiecutter
+          no_output_timeout: "30s"
+
+workflows:
+  version: 2
+  my-workflow:
+    jobs:
+      - check_out_source_code
+      - test_pypi_project:
+          requires:
+            - check_out_source_code
