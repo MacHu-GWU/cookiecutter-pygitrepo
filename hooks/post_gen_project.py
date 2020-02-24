@@ -47,7 +47,6 @@ if __name__ == '__main__':
 
     if "{{ cookiecutter.is_aws_cloudformation_project }}" != "Y":
         remove_file_or_dir("{{ cookiecutter.package_name }}/cf")
-        remove_file_or_dir("{{ cookiecutter.package_name }}/devops")
 
     if "{{ cookiecutter.command_line_interface }}".lower() != "click":
         remove_file_or_dir("{{ cookiecutter.package_name }}", "cli.py")
