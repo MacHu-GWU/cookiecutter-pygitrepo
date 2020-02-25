@@ -36,7 +36,7 @@ Things to do Next after generated the project skeleton:
 
 
 if __name__ == '__main__':
-    if "{{ cookiecutter.doc_service }}" != "rtd":
+    if "{{ cookiecutter.doc_service }}" != "RTD":
         remove_file_or_dir("readthedocs.yml")
 
     if "{{ cookiecutter.is_aws_lambda_project }}" != "Y":
@@ -48,7 +48,7 @@ if __name__ == '__main__':
     if "{{ cookiecutter.is_aws_cloudformation_project }}" != "Y":
         remove_file_or_dir("{{ cookiecutter.package_name }}/cf")
 
-    if "{{ cookiecutter.command_line_interface }}".lower() != "click":
+    if "{{ cookiecutter.has_command_line_interface }}".lower() != "click":
         remove_file_or_dir("{{ cookiecutter.package_name }}", "cli.py")
 
     print(help_msg)

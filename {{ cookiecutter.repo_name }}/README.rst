@@ -1,11 +1,13 @@
 {%- set _github_url = 'https://github.com/%(github_username)s/%(repo_name)s'|format(github_username=cookiecutter.github_username, repo_name=cookiecutter.repo_name) -%}
-{%- if cookiecutter.doc_service == 'rtd' -%}
-{%- set _doc_domain = 'https://%(doc_rtd_project_name)s.readthedocs.io'|format(doc_rtd_project_name=cookiecutter.doc_rtd_project_name) -%}
-{%- elif cookiecutter.doc_service == 's3' -%}
+{%- if cookiecutter.doc_service == 'RTD' -%}
+{%- set _doc_domain = 'https://%(rtd_project_name)s.readthedocs.io'|format(rtd_project_name=cookiecutter.rtd_project_name) -%}
+{%- elif cookiecutter.doc_service == 'S3' -%}
 {%- set _doc_domain = 'http://%(doc_host_s3_bucket_name)s.s3.amazonaws.com/docs/%(package_name)s/latest'|format(doc_host_s3_bucket_name=cookiecutter.doc_host_s3_bucket_name, package_name=cookiecutter.package_name) -%}
+{%- else -%}
+{%- set _doc_domain = 'http://{{ cookiecutter.package_name }}.my-docs.com' -%}
 {%- endif -%}
-{%- if cookiecutter.doc_service == 'rtd' %}
-.. image:: https://readthedocs.org/projects/{{ cookiecutter.doc_rtd_project_name }}/badge/?version=latest
+{%- if cookiecutter.doc_service == 'RTD' %}
+.. image:: https://readthedocs.org/projects/{{ cookiecutter.rtd_project_name }}/badge/?version=latest
     :target: {{ _doc_domain }}/index.html
     :alt: Documentation Status
 {% endif %}

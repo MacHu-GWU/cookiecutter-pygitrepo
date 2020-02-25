@@ -181,7 +181,7 @@ if __name__ == "__main__":
         license=LICENSE,
         install_requires=REQUIRES,
         extras_require=EXTRA_REQUIRE,
-        {%- if 'no' not in cookiecutter.command_line_interface|lower %}
+        {%- if cookiecutter.has_command_line_interface == "Y" %}
         entry_points={
             "console_scripts": [
                 "{{ cookiecutter.package_name }}={{ cookiecutter.package_name }}.cli:main",

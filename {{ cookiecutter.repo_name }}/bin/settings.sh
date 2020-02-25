@@ -27,9 +27,9 @@ supported_py_versions="{{ cookiecutter.supported_python_versions }}" # e.g: "2.7
 
 
 #--- Doc Build
-rtd_project_name="{{ cookiecutter.doc_rtd_project_name }}"
+rtd_project_name="{{ cookiecutter.rtd_project_name }}"
 
-{%- if cookiecutter.doc_service == "s3" %}
+{%- if cookiecutter.doc_service == "S3" %}
 # AWS profile name for hosting doc on S3
 # should be defined in ~/.aws/credentials
 # read https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html for more information

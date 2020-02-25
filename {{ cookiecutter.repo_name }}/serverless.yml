@@ -3,7 +3,7 @@
 # https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/
 
 service:
-  name: {{ cookiecutter.package_slug }}
+  name: {{ cookiecutter.package_name_slug }}
 
 provider:
   name: aws
