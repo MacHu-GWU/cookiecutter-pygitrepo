@@ -44,6 +44,7 @@ stop_test_if_failed
 echo "--- run: make req-dev"
 make req-dev
 stop_test_if_failed
+set +e
 
 echo "--- enter virtualenv"
 source ./bin/py/activate.sh
@@ -51,6 +52,7 @@ source ./bin/py/activate.sh
 echo "--- switch env to dev"
 ./config/switch-env dev
 
+set -e
 echo "--- deploy app to test AWS account"
 python ./devops/deploy_cf_example.py
 
