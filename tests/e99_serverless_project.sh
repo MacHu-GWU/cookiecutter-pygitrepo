@@ -42,8 +42,16 @@ echo "--- run: make req-dev"
 make req-dev
 stop_test_if_failed
 
+echo "--- enter virtualenv"
 source ./bin/py/activate.sh
 
+echo "--- switch env to dev"
 ./config/switch-env dev
 
+echo "--- deploy app to test AWS account"
 python ./devops/deploy_cf_example.py
+
+sleep 110
+
+echo "--- test the deployment"
+python ../e99_serverless_project_integration_test.py

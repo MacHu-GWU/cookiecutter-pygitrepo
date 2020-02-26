@@ -27,7 +27,7 @@ jobs:
             sudo pip install -r requirements.txt # install cookiecutter
             cd ./tests
             bash ./e99_serverless_project.sh
-          no_output_timeout: "30s"
+          no_output_timeout: "120s"
 
 workflows:
   version: 2
