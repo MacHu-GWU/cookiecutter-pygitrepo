@@ -12,19 +12,19 @@ dir_here="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 repo_name="a_micro_service-project"
 
-#rm -r "${dir_here}/${repo_name}"
+rm -r "${dir_here}/${repo_name}"
 
-#python "${dir_here}/e99_serverless_project.py"
+python "${dir_here}/e99_serverless_project.py"
 
 cd "${dir_here}/${repo_name}"
 
-#echo "--- run: make remove"
-#make remove
-#stop_test_if_failed
-#
-#echo "--- run: make clean"
-#make clean
-#stop_test_if_failed
+echo "--- run: make remove"
+make remove
+stop_test_if_failed
+
+echo "--- run: make clean"
+make clean
+stop_test_if_failed
 
 echo "--- run: make info"
 make info

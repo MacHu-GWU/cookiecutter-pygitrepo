@@ -16,7 +16,7 @@ jobs:
               - .
 
   # General Python Library Open Source Project
-  test_pypi_project:
+  test_aws_lambda_project:
     <<: *use_python368_docker
     steps:
       - attach_workspace:
@@ -34,6 +34,6 @@ workflows:
   build_and_test:
     jobs:
       - check_out_source_code
-      - test_pypi_project:
+      - test_aws_lambda_project:
           requires:
             - check_out_source_code
