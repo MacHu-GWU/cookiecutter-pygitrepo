@@ -55,3 +55,9 @@ sleep 110
 
 echo "--- test the deployment"
 python ../e99_serverless_project_integration_test.py
+
+echo "--- test reading the configs"
+python ./devops/read_config_example.py
+
+echo "--- test build lambda source"
+make lbd-build-source

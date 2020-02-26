@@ -17,10 +17,13 @@ shared_secret_config_file = join(dir_project_root, "config", "00-config-shared-s
 env_config_file = join(dir_project_root, "config", "config-raw.json")
 
 config = Config()
+
+# circleci container runtime
 if config.is_circle_ci_runtime():
     config.update(json_loads(read_text(shared_config_file)))
     config.update(json_loads(read_text(env_config_file)))
     config.AWS_ACCOUNT_ID.set_value(os.environ["AWS_ACCOUNT_ID"])
+# aws lambda runtime
 elif config.is_aws_lambda_runtime():
     config.update_from_env_var(prefix="PYGITREPO_")
 # local runtime

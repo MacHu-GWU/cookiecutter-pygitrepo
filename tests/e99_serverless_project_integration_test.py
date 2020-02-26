@@ -15,3 +15,6 @@ create_at = res_get_role["Role"]["CreateDate"]
 now = datetime.utcnow()
 now = now.replace(tzinfo=timezone.utc)
 assert (now - create_at).total_seconds() <= 120 # 2 minutes
+
+cft = boto_ses.client("cloudformation")
+cft.delete_stack(StackName="pygitrepo={}".format(config.ENVIRONMENT_NAME.get_value()))
