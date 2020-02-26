@@ -16,19 +16,33 @@ jobs:
               - .
 
   # General Python Library Open Source Project
+  test_python_open_source_project:
+    <<: *use_python368_docker
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name:
+          command: |
+            sudo pip install -r requirements.txt # install cookiecutter
+            cd ./tests
+            bash ./e1_pypi_library_test.sh
+          no_output_timeout: "30s"
+
+  # AWS Lambda Microservice Project with mature CI/CD
   test_aws_lambda_project:
     <<: *use_python368_docker
     steps:
       - attach_workspace:
           at: .
-      - setup_remote_docker
       - run:
           name:
           command: |
             sudo pip install -r requirements.txt # install cookiecutter
             cd ./tests
             bash ./e99_serverless_project.sh
-          no_output_timeout: "120s"
+          no_output_timeout: "30s"
+
 
 workflows:
   version: 2

@@ -10,11 +10,15 @@ stop_test_if_failed() {
 
 dir_here="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-rm -r "${dir_here}/a_pypi_library-project"
-#
-python "${dir_here}/e1_pypi_library.py"
+repo_name="a_pypi_library-project"
 
-cd "${dir_here}/a_pypi_library-project"
+rm -r "${dir_here}/${repo_name}"
+
+set -e
+python "${dir_here}/e1_pypi_library.py"
+set +e
+
+cd "${dir_here}/${repo_name}"
 
 echo "--- run: make remove"
 make remove
@@ -28,6 +32,7 @@ echo "--- run: make info"
 make info
 stop_test_if_failed
 
+set -e
 echo "--- run: make up"
 make up
 stop_test_if_failed
