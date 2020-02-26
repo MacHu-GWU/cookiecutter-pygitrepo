@@ -52,7 +52,7 @@ s3_bucket_doc_host="{{ cookiecutter.doc_host_s3_bucket_name }}"
 # AWS profile name for deploy lambda function
 # should be defined in ~/.aws/credentials
 # read https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html for more information
-aws_profile_for_deploy="$($path_read_config_value_script $path_shared_config_file "AWS_PROFILE_FOR_DEPLOY")"
+aws_profile_for_deploy="$($path_read_config_value_script $path_shared_config_file "AWS_PROFILE")"
 
 # deployment package file will be upload to:
 # "s3://${s3_bucket_lambda_deploy}/lambda/${github_account}/${github_repo_name}/${package_name}-${package_version}.zip"

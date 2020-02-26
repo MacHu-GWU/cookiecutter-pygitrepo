@@ -14,6 +14,12 @@ else
     is_ci="N"
 fi
 
+if [ -n "$TRAVIS" ]; then # if has value
+    is_travisci="Y"
+else
+    is_travisci="N"
+fi
+
 if [ -n "$CIRCLECI" ]; then # if has value
     is_circleci="Y"
 else

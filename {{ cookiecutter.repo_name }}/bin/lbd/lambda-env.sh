@@ -38,8 +38,8 @@ s3_key_lambda_deploy_repo_root="lambda/${github_account}/${github_repo_name}"
 s3_key_lambda_deploy_pkg_file="${s3_key_lambda_deploy_repo_root}/${package_version}/deploy-pkg.zip"
 s3_uri_lambda_deploy_pkg_file="s3://${s3_bucket_lambda_deploy}/${s3_key_lambda_deploy_pkg_file}"
 
-s3_key_lambda_source_file="${s3_key_lambda_deploy_repo_root}/${package_version}/source.zip"
-s3_uri_lambda_source_file="s3://${s3_bucket_lambda_deploy}/${s3_key_lambda_source_file}"
+s3_key_lambda_source_file_prefix="${s3_key_lambda_deploy_repo_root}/${package_version}/source"
+s3_uri_lambda_source_file_prefix="s3://${s3_bucket_lambda_deploy}/${s3_key_lambda_source_file_prefix}"
 
 s3_key_lambda_layer_file="${s3_key_lambda_deploy_repo_root}/${package_version}/layer.zip"
 s3_uri_lambda_layer_file="s3://${s3_bucket_lambda_deploy}/${s3_key_lambda_layer_file}"
@@ -107,6 +107,8 @@ build_lbd_source_code() {
 
 upload_lbd_source_code() {
     if [ -e $path_lambda_source_file ]; then
+        source_md5="$(python ${dir_bin}/py/md5.py ${path_lambda_source_file})"
+        s3_uri_lambda_source_file="${s3_uri_lambda_source_file_prefix}-${source_md5}.zip"
         aws s3 cp ${path_lambda_source_file} ${s3_uri_lambda_source_file} \
             ${profile_arg}
     else
