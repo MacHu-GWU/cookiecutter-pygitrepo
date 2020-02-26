@@ -8,6 +8,9 @@ from cookiecutter.main import cookiecutter
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+with open(os.path.join(PROJECT_ROOT, "version.txt"), "rb") as f:
+    _cookiecutter_pygitrepo_version = f.read().decode("utf-8").strip()
+
 extra_context = dict(
     package_name="a_micro_service",
     package_name_slug="a-micro-service",
@@ -39,6 +42,7 @@ extra_context = dict(
     ),
     _current_year=datetime.now().year,
     _current_date=str(date.today()),
+    _cookiecutter_pygitrepo_version=_cookiecutter_pygitrepo_version,
 )
 
 
