@@ -49,6 +49,9 @@ workflows:
   build_and_test:
     jobs:
       - check_out_source_code
+      - test_python_open_source_project:
+          requires:
+            - check_out_source_code
       - test_aws_lambda_project:
           requires:
             - check_out_source_code
