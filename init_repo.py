@@ -519,6 +519,51 @@ class Arguments(object):
         if self.is_aws_project.upper() != "Y":
             return
 
+    def input_aws_region(self):
+        if self.is_aws_project.upper() != "Y":
+            return
+
+        msg = ("Enter the AWS REGION for DEVELOPMENT and DEPLOYMENT. "
+               "Example: us-east-1. For full list of AWS REGION, "
+               "see https://docs.aws.amazon.com/general/latest/gr/rande.html"
+               " [required]: ")
+        self.aws_region = input(Style.CYAN + msg + Style.RESET)
+
+    def init_aws_region(self):
+        if self.is_aws_project.upper() != "Y":
+            return
+
+        if not self.aws_region.strip():
+            msg = "aws region name is required!"
+            logger.error(msg)
+            self._process_arg("aws_region")
+
+    def check_aws_region(self):
+        if self.is_aws_project.upper() != "Y":
+            return
+
+    def input_aws_account_id(self):
+        if self.is_aws_project.upper() != "Y":
+            return
+
+        msg = ("Enter the 12 digits AWS ACCOUNT ID for DEVELOPMENT and DEPLOYMENT. "
+               "Log in to your AWS Console to view your account id."
+               " [required]: ")
+        self.aws_account_id = input(Style.CYAN + msg + Style.RESET)
+
+    def init_aws_account_id(self):
+        if self.is_aws_project.upper() != "Y":
+            return
+
+        if not self.aws_account_id.strip():
+            msg = "aws account name is required!"
+            logger.error(msg)
+            self._process_arg("aws_account_id")
+
+    def check_aws_account_id(self):
+        if self.is_aws_project.upper() != "Y":
+            return
+
     def input_deployment_s3_bucket_name(self):
         if not (self.is_aws_cloudformation_project.upper() == "Y"
                 or self.is_aws_lambda_project.upper() == "Y"):

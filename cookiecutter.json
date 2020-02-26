@@ -16,6 +16,8 @@
     "want_devops_tools": "",
     "is_aws_project": "",
     "aws_profile_name": "",
+    "aws_region": "{AWS_REGION}",
+    "aws_account_id": "{AWS_ACCOUNT_ID}",
     "deployment_s3_bucket_name": "",
     "is_aws_lambda_project": "",
     "is_aws_cloudformation_project": "",
