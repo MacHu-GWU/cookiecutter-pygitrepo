@@ -1,6 +1,6 @@
 
-.. image:: https://travis-ci.org/MacHu-GWU/cookiecutter-pygitrepo.svg?branch=master
-    :target: https://travis-ci.org/MacHu-GWU/cookiecutter-pygitrepo?branch=master
+.. image:: https://circleci.com/gh/MacHu-GWU/cookiecutter-pygitrepo/tree/master.svg?style=svg
+    :target: https://circleci.com/gh/MacHu-GWU/cookiecutter-pygitrepo/tree/master
 
 ------
 
