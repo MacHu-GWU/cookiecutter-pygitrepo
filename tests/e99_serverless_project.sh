@@ -1,8 +1,6 @@
 #!/bin/bash
 # -*- coding: utf-8 -*-
 
-set -e
-
 stop_test_if_failed() {
     if ! [ $? -eq 0 ]; then
         echo "TEST FAILED!"
@@ -16,7 +14,9 @@ repo_name="a_micro_service-project"
 
 rm -r "${dir_here}/${repo_name}"
 
+set -e
 python "${dir_here}/e99_serverless_project.py"
+set +e
 
 cd "${dir_here}/${repo_name}"
 
@@ -32,6 +32,7 @@ echo "--- run: make info"
 make info
 stop_test_if_failed
 
+set -e
 echo "--- run: make up"
 make up
 stop_test_if_failed
