@@ -1,6 +1,8 @@
 #!/bin/bash
 # -*- coding: utf-8 -*-
 
+set -e
+
 stop_test_if_failed() {
     if ! [ $? -eq 0 ]; then
         echo "TEST FAILED!"
