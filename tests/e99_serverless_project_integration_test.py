@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from a_micro_service.devops.config_init import config
 
 try:
+    print("verify the IAM Role is newly created ...")
     boto_ses = boto3.session.Session(
         profile_name=config.AWS_PROFILE_FOR_BOTO3.get_value(),
         region_name=config.AWS_REGION.get_value(),
@@ -19,6 +20,7 @@ try:
 
     assert (now - create_at).total_seconds() <= 120 # 2 minutes
 
+    print("remove test stack")
     cft = boto_ses.client("cloudformation")
     cft.delete_stack(StackName="pygitrepo-{}".format(config.ENVIRONMENT_NAME.get_value()))
 except:

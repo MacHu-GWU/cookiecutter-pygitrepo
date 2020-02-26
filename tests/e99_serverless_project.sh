@@ -58,7 +58,7 @@ python ./devops/deploy_cf_example.py
 
 sleep 30
 
-echo "--- test the deployment"
+echo "--- test the deployment, run integration test"
 python ../e99_serverless_project_integration_test.py
 
 echo "--- test reading the configs"
