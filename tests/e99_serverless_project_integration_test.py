@@ -10,8 +10,8 @@ boto_ses = boto3.session.Session(
 )
 iam = boto_ses.client("iam")
 
-res_get_instance_profile = iam.get_instance_profile(InstanceProfileName="pygitrepo-{}-ec2-instance-profile".format(config.ENVIRONMENT_NAME.get_value()))
-create_at = res_get_instance_profile["InstanceProfile"]["CreateDate"]
+res_get_role = iam.get_role(RoleName="pygitrepo-{}-ec2-role".format(config.ENVIRONMENT_NAME.get_value()))
+create_at = res_get_role["Role"]["CreateDate"]
 now = datetime.utcnow()
 now = now.replace(tzinfo=timezone.utc)
 assert (now - create_at).total_seconds() <= 120 # 2 minutes

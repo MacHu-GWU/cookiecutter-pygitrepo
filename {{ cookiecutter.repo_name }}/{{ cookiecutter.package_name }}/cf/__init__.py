@@ -46,17 +46,6 @@ ec2_iam_role = iam.Role(
     ],
 )
 
-
-ec2_iam_instance_profile = iam.InstanceProfile(
-    "EC2InstanceProfile",
-    template=template,
-    InstanceProfileName=helper_fn_sub("{}-ec2-instance-profile", param_env_name),
-    Roles=[
-        ec2_iam_role.iam_role_name,
-    ]
-)
-
-
 template.create_resource_type_label()
 
 # give all aws resource common tags
