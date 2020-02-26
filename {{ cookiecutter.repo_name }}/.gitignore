@@ -2,7 +2,15 @@
 {{ cookiecutter.package_name }}_venv/
 {{ cookiecutter.package_name }}.egg-info/
 {{ cookiecutter.package_name }}-*/
+
+config/00-config-shared-secrets.json
 config/config-raw.json
+config/config-final-for-python.json
+config/config-final-for-shell-script.json
+config/config-final-for-cloudformation.json
+config/config-final-for-sam.json
+config/config-final-for-serverless.json
+config/config-final-for-terraform.json
 
 
 # Byte-compiled / optimized / DLL files

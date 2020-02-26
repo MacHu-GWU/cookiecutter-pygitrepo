@@ -4,7 +4,7 @@ from configirl import ConfigClass, Constant, Derivable
 
 
 class Config(ConfigClass):
-    METADATA = Constant(default=dict())
+    METADATA = Constant(default=dict(), dont_dump=True)
 
     PROJECT_NAME = Constant()
     PROJECT_NAME_SLUG = Derivable()
@@ -30,13 +30,15 @@ class Config(ConfigClass):
     def get_AWS_PROFILE_FOR_BOTO3(self):
         if self.is_aws_ec2_runtime():
             return None
+        elif self.is_aws_lambda_runtime():
+            return None
         elif self.is_circle_ci_runtime():
             return None
         else: # local computer runtime
             return self.AWS_PROFILE.get_value()
 
     AWS_REGION = Constant()
-    AWS_ACCOUNT_ID = Constant()
+    AWS_ACCOUNT_ID = Constant(printable=False)
     {%- endif %}
 
     {%- if cookiecutter.is_aws_cloudformation_project == "Y" or  cookiecutter.is_aws_lambda_project == "Y" %}
