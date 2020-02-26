@@ -36,6 +36,15 @@ Things to do Next after generated the project skeleton:
 
 
 if __name__ == '__main__':
+    if "{{ cookiecutter.has_command_line_interface }}" != "Y":
+        remove_file_or_dir("{{ cookiecutter.package_name }}", "cli.py")
+
+    if "{{ cookiecutter.cicd_service|upper }}" != "TRAVIS":
+        remove_file_or_dir(".travis.yml")
+
+    if "{{ cookiecutter.cicd_service|upper }}" != "CIRCLECI":
+        remove_file_or_dir(".circleci")
+
     if "{{ cookiecutter.doc_service }}" != "RTD":
         remove_file_or_dir("readthedocs.yml")
 
@@ -47,8 +56,5 @@ if __name__ == '__main__':
 
     if "{{ cookiecutter.is_aws_cloudformation_project }}" != "Y":
         remove_file_or_dir("{{ cookiecutter.package_name }}/cf")
-
-    if "{{ cookiecutter.has_command_line_interface }}".lower() != "click":
-        remove_file_or_dir("{{ cookiecutter.package_name }}", "cli.py")
 
     print(help_msg)

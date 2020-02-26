@@ -1,6 +1,10 @@
 {
     {%- if cookiecutter.is_aws_project == "Y" %}
-    "AWS_PROFILE_FOR_DEPLOY": "{{ cookiecutter.aws_profile_name }}",
+    "AWS_PROFILE": "{{ cookiecutter.aws_profile_name }}",
+    "AWS_REGION": "",
+    "AWS_ACCOUNT_ID": "",
+    {%- endif %}
+    {%- if cookiecutter.is_aws_cloudformation_project == "Y" or cookiecutter.is_aws_lambda_project == "Y" %}
     "S3_BUCKET_FOR_DEPLOY": "{{ cookiecutter.deployment_s3_bucket_name }}",
     {%- endif %}
     "PROJECT_NAME": "{{ cookiecutter.package_name }}"
