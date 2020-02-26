@@ -233,3 +233,16 @@ Dev Guide
 
 1. Run ``dev.py``, generate ``learn_awslambda-project`` repo.
 2. Test with ``make xxx`` command.
+
+
+
+Release Strategy
+------------------------------------------------------------------------------
+
+A new version will be released to a release branch every 3 - 6 months.
+
+The master branch represent the latest development version.
+
+All release branches are production ready.
+
+To use specific version, just clone the specific release branch and run ``python ./init_repo.py``

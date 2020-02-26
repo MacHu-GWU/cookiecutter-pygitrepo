@@ -1,0 +1,69 @@
+// cookiecutter-pygitrepo project use real IAM User to test with the
+// AWS Project Skeleton. Use this in-line IAM Policy for test.
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateInstanceProfile",
+                "iam:GetPolicyVersion",
+                "iam:UntagRole",
+                "iam:TagRole",
+                "iam:RemoveRoleFromInstanceProfile",
+                "iam:DeletePolicy",
+                "iam:CreateRole",
+                "iam:AttachRolePolicy",
+                "iam:PutRolePolicy",
+                "iam:AddRoleToInstanceProfile",
+                "iam:PassRole",
+                "iam:DetachRolePolicy",
+                "iam:DeleteRolePolicy",
+                "iam:CreatePolicyVersion",
+                "iam:DeleteInstanceProfile",
+                "iam:GetRole",
+                "iam:GetInstanceProfile",
+                "iam:GetPolicy",
+                "iam:DeleteRole",
+                "iam:CreatePolicy",
+                "s3:PutObject",
+                "s3:GetObject",
+                "iam:ListPolicyVersions",
+                "iam:UpdateRole",
+                "iam:GetRolePolicy",
+                "iam:DeletePolicyVersion",
+                "iam:SetDefaultPolicyVersion"
+            ],
+            "Resource": [
+                "arn:aws:s3:::sanhe-admin-for-everything/cloudformation/upload/*",
+                "arn:aws:iam::{AWS_ACCOUNT_ID}:role/pygitrepo-*",
+                "arn:aws:iam::{AWS_ACCOUNT_ID}:instance-profile/pygitrepo-*",
+                "arn:aws:iam::{AWS_ACCOUNT_ID}:policy/pygitrepo-*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "cloudformation:EstimateTemplateCost",
+                "cloudformation:DescribeStackDriftDetectionStatus",
+                "cloudformation:ListExports",
+                "cloudformation:ListStacks",
+                "cloudformation:ListImports",
+                "cloudformation:DescribeAccountLimits",
+                "cloudformation:ValidateTemplate"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor2",
+            "Effect": "Allow",
+            "Action": "cloudformation:*",
+            "Resource": [
+                "arn:aws:cloudformation:us-east-1:{AWS_ACCOUNT_ID}:stackset/pygitrepo-*:*",
+                "arn:aws:cloudformation:us-east-1:{AWS_ACCOUNT_ID}:stack/pygitrepo-*/*"
+            ]
+        }
+    ]
+}

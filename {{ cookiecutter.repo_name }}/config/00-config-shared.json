@@ -1,7 +1,7 @@
 {
     {%- if cookiecutter.is_aws_project == "Y" %}
     "AWS_PROFILE": "{{ cookiecutter.aws_profile_name }}",
-    "AWS_REGION": "",
+    "AWS_REGION": "us-east-1",
     "AWS_ACCOUNT_ID": "",
     {%- endif %}
     {%- if cookiecutter.is_aws_cloudformation_project == "Y" or cookiecutter.is_aws_lambda_project == "Y" %}

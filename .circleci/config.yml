@@ -37,3 +37,4 @@ workflows:
       - test_aws_lambda_project:
           requires:
             - check_out_source_code
+          context: cookiecutter-pygitrepo-test-credentials
