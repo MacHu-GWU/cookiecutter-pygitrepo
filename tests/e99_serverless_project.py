@@ -11,6 +11,8 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 with open(os.path.join(PROJECT_ROOT, "version.txt"), "rb") as f:
     _cookiecutter_pygitrepo_version = f.read().decode("utf-8").strip()
 
+aws_account_id = os.environ["AWS_ACCOUNT_ID"]
+
 extra_context = dict(
     package_name="a_micro_service",
     package_name_slug="a-micro-service",
@@ -29,6 +31,8 @@ extra_context = dict(
     want_devops_tools="Y",
     is_aws_project="Y",
     aws_profile_name="sanhe",
+    aws_region="us-east-1",
+    aws_account_id=aws_account_id,
     deployment_s3_bucket_name="sanhe-admin-for-everything",
     is_aws_lambda_project="Y",
     is_aws_cloudformation_project="Y",

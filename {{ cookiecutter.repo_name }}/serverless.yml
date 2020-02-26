@@ -16,8 +16,12 @@ provider:
   deploymentBucket:
     name: {{ cookiecutter.deployment_s3_bucket_name }}
   deploymentPrefix: serverless
-  role: "<put-your-own-lambda-iam-role-arn-here>"
+  role: arn:aws:iam::{{ cookiecutter.aws_account_id }}:role/cookiecutter-pygitrepo-test # CHANGE THIS
   versionFunctions: false
+  environment:
+    # Inject non-sensitive config into lambda runtime environment variable.
+    # for sensitive config, use secret manager.
+    PYGITREPO_PROJECT_NAME: ${file(./config/config-final-for-serverless.json):PROJECT_NAME}
 
 package:
   artifact: ./build/lambda/source.zip
@@ -27,4 +31,4 @@ functions:
     handler: {{ cookiecutter.package_name }}.handlers.my_func.handler
     description:
     layers:
-      - "<put-your-own-lambda-layers-arn-here>"
+      - "arn:aws:lambda:{{ cookiecutter.aws_region }}:{{ cookiecutter.aws_account_id }}:layer:{{ cookiecutter.package_name }}:1" # CHANGE THIS
