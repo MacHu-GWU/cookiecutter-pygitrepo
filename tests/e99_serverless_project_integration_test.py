@@ -21,8 +21,6 @@ try:
 
     cft = boto_ses.client("cloudformation")
     cft.delete_stack(StackName="pygitrepo-{}".format(config.ENVIRONMENT_NAME.get_value()))
-
-    assert 1 == 0
 except:
     traceback.print_exc()
     sys.exit(1)
