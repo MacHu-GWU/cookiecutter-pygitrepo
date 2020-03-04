@@ -4,7 +4,7 @@
 {%- elif cookiecutter.doc_service == 'S3' -%}
 {%- set _doc_domain = 'http://%(doc_host_s3_bucket_name)s.s3.amazonaws.com/docs/%(package_name)s/latest'|format(doc_host_s3_bucket_name=cookiecutter.doc_host_s3_bucket_name, package_name=cookiecutter.package_name) -%}
 {%- else -%}
-{%- set _doc_domain = 'http://{{ cookiecutter.package_name }}.my-docs.com' -%}
+{%- set _doc_domain = 'http://%(package_name)s.my-docs.com'|format(package_name=cookiecutter.package_name) -%}
 {%- endif -%}
 {%- if cookiecutter.doc_service == 'RTD' %}
 .. image:: https://readthedocs.org/projects/{{ cookiecutter.rtd_project_name }}/badge/?version=latest
