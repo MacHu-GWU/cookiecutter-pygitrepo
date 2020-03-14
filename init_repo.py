@@ -601,15 +601,6 @@ def init_package_name(value):
     pass
 
 
-# Arg.package_name = input(Style.CYAN + "Enter your python package name: ")
-
-# check_package_name(Arg.package_name)
-
-# print(Style.RESET)
-#
-# print(arg_to_dct(Arg))
-
-
 if __name__ == "__main__":
     import os
     from cookiecutter.main import cookiecutter
