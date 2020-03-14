@@ -11,7 +11,11 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 with open(os.path.join(PROJECT_ROOT, "version.txt"), "rb") as f:
     _cookiecutter_pygitrepo_version = f.read().decode("utf-8").strip()
 
-aws_account_id = os.environ["AWS_ACCOUNT_ID"]
+
+if "CIRCLECI" in os.environ:
+    aws_account_id = os.environ["AWS_ACCOUNT_ID"]
+else:
+    aws_account_id = "111122223333"
 
 extra_context = dict(
     package_name="a_micro_service",

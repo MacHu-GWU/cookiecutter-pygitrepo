@@ -16,9 +16,10 @@ extra_context = dict(
     github_username="MacHu-GWU",
     author_name="Sanhe Hu",
     author_email="husanhe@gmail.com",
-    command_line_interface="Click",
+    has_command_line_interface="Y",
     supported_python_versions="2.7.13 3.6.2",
     use_pyenv="N",
+    cicd_service="NO CI",
     doc_service="S3",
     doc_host_aws_profile_name="sanhe",
     doc_host_s3_bucket_name="sanherabbit.com",
@@ -27,7 +28,6 @@ extra_context = dict(
     deployment_s3_bucket_name="sanhe-admin-deployment",
     is_aws_lambda_project="Y",
     is_aws_cloudformation_project="Y",
-
 
     _dev_py_ver_major=sys.version_info.major,
     _dev_py_ver_minor=sys.version_info.minor,
@@ -43,14 +43,10 @@ extra_context = dict(
 )
 
 
-def run_cookie_cutter():
+if __name__ == "__main__":
     cookiecutter(
         dir_here,
         extra_context=extra_context,
         no_input=True,
         # overwrite_if_exists=True,
     )
-
-
-if __name__ == "__main__":
-    run_cookie_cutter()
