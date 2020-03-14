@@ -93,6 +93,7 @@ class Arguments(object):
         self.is_aws_cloudformation_project = self.is_aws_cloudformation_project_default
         self.is_aws_lambda_project = self.is_aws_lambda_project_default
         self.aws_profile_name = None
+        self.aws_region = None
         self.deployment_s3_bucket_name = None
 
     def _process_arg(self, arg_name):

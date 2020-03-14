@@ -41,6 +41,6 @@ class Config(ConfigClass):
     AWS_ACCOUNT_ID = Constant(printable=False)
     {%- endif %}
 
-    {%- if cookiecutter.is_aws_cloudformation_project == "Y" or  cookiecutter.is_aws_lambda_project == "Y" %}
+    {%- if cookiecutter.is_aws_cloudformation_project == "Y" or cookiecutter.is_aws_lambda_project == "Y" %}
     S3_BUCKET_FOR_DEPLOY = Constant()
     {%- endif %}
