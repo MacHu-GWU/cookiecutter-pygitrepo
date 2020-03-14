@@ -73,6 +73,11 @@ if __name__ == '__main__':
     if "{{ cookiecutter.doc_service }}" != "RTD":
         remove_file_or_dir("readthedocs.yml")
 
+    if "{{ cookiecutter.want_devops_tools }}" != "Y":
+        remove_file_or_dir("config")
+        remove_file_or_dir("bin/py/config-init.sh")
+        remove_file_or_dir("{{ cookiecutter.package_name }}/devops")
+
     if "{{ cookiecutter.is_aws_cloudformation_project }}" != "Y":
         remove_file_or_dir("{{ cookiecutter.package_name }}/cf")
         remove_file_or_dir("devops", "deploy_cf_example.py")

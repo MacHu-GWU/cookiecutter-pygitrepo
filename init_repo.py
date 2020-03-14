@@ -62,7 +62,7 @@ class Arguments(object):
     rtd_project_name_default = "a_example_package"
 
     want_devops_tools_options = ["N", "Y"]
-    want_devops_tools_default = has_command_line_interface_options[0]
+    want_devops_tools_default = want_devops_tools_options[0]
 
     is_aws_project_options = ["N", "Y"]
     is_aws_project_default = is_aws_project_options[0]
