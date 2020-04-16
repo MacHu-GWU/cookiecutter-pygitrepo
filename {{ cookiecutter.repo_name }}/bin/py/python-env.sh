@@ -19,7 +19,7 @@ dir_project_root=$(dirname "${dir_bin}")
 source ${dir_bin}/settings.sh
 source ${dir_bin}/source/detect-os.sh
 source ${dir_bin}/source/helpers.sh
-source ${dir_bin}/aws-env/aws-env.sh
+source ${dir_bin}/aws/aws-env.sh
 
 # Virtualenv Name
 venv_name="${package_name}_venv"
