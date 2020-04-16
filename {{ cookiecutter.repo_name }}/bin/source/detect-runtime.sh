@@ -25,3 +25,9 @@ if [ -n "$CIRCLECI" ]; then # if has value
 else
     is_circleci="N"
 fi
+
+if [ -n "$CODEBUILD_BUILD_ID" ]; then # if has value
+    is_aws_codebuild="Y"
+else
+    is_aws_codebuild="N"
+fi
