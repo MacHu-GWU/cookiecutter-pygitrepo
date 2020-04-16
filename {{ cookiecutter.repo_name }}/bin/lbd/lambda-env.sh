@@ -17,6 +17,7 @@ dir_bin="$(dirname "${dir_here}")"
 dir_project_root=$(dirname "${dir_bin}")
 
 source ${dir_bin}/aws/aws-env.sh
+source ${dir_bin}/py/python-env.sh
 
 layer_name="${package_name}"
 path_build_lambda_dir="${path_build_dir}/lambda"

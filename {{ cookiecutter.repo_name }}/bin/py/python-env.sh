@@ -18,8 +18,8 @@ dir_project_root=$(dirname "${dir_bin}")
 
 source ${dir_bin}/settings.sh
 source ${dir_bin}/source/detect-os.sh
-source ${dir_bin}/source/detect-runtime.sh
 source ${dir_bin}/source/helpers.sh
+source ${dir_bin}/aws-env/aws-env.sh
 
 # Virtualenv Name
 venv_name="${package_name}_venv"
@@ -203,10 +203,10 @@ deploy_doc_to_s3() {
     aws s3 rm ${tmp_s3_uri_doc} \
         --recursive \
         --only-show-errors \
-        --profile ${aws_profile_doc_host}
+        ${aws_cli_profile_arg}
 
     echo "upload doc to ${tmp_s3_uri_doc}"
     aws s3 sync ${tmp_path_sphinx_doc_build_html} ${tmp_s3_uri_doc} \
         --only-show-errors \
-        --profile ${aws_profile_doc_host}
+        ${aws_cli_profile_arg}
 }

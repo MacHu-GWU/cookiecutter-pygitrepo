@@ -16,15 +16,13 @@ source ${dir_bin}/py/python-env.sh
 # if string is null, it is not
 if [ "${is_circleci}" = "Y" ]
 then
-    profile_arg=""
+    aws_cli_profile_arg=""
+    sls_aws_profile_arg=""
+elif [ "${is_ec2}" = "Y" ]
+then
+    aws_cli_profile_arg=""
     sls_aws_profile_arg=""
 else
-    profile_arg="--profile ${aws_profile_for_deploy}"
+    aws_cli_profile_arg="--profile ${aws_profile_for_deploy}"
     sls_aws_profile_arg="--aws-profile "${aws_profile_for_deploy}""
-fi
-
-if [ "${is_ec2}" = "Y" ]
-then
-    profile_arg=""
-    sls_aws_profile_arg=""
 fi
