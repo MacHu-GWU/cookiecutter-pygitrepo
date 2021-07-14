@@ -165,6 +165,8 @@ notation:
 ::
 
     <repo_name>
+    |-- .github
+    |-- .circleci
     |-- bin
         |-- py                  # python environment bin tools and shell scripts
         |-- lbd                 # aws lambda bin tools and shell scripts
@@ -206,6 +208,7 @@ notation:
         |-- all.py              # invoke all test from python script
         |-- test_xxx.py
     |-- .coveragerc
+    |-- codecov.yml
     |-- .gitattributes
     |-- .gitignore
     |-- .travis.yml

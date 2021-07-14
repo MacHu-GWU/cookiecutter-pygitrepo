@@ -2,6 +2,7 @@
 learn_cc-project/
 learn_awslambda-project/
 tests/*/
+tmp/*
 
 
 # Byte-compiled / optimized / DLL files
