@@ -1,0 +1,78 @@
+version: 2.1
+
+executors:
+  python-docker:
+    docker:
+      - image: cimg/python:{{ cookiecutter._dev_py_ver_full }}
+
+jobs:
+  checkout-source-code:
+    executor: python-docker
+    steps:
+      - run: pwd
+      - run: mkdir -p ~/repo
+      - checkout:
+          path: ~/repo
+      - run: pwd
+      - persist_to_workspace: # persist repo source code
+          root: ~/
+          paths:
+            - "*"
+
+  # https://circleci.com/docs/2.0/caching/#restoring-cache
+  setup-python-virtualenv:
+    executor: python-docker
+    working_directory: ~/repo
+    steps:
+      - attach_workspace: # restore repository codes, avoid re-checkout
+          at: ~/
+      - run: pwd
+      - run: ls
+      # load python virtualenv from cache is possible
+      - restore_cache: # restore venv cache
+          keys:
+            {% raw -%}
+            - venv-cache-{{ checksum "requirements.txt" }} # dynamic cache key
+            {% endraw %}
+      # setup python virtualenv
+      - run: bash ./bin/py/venv-up.sh
+      - run: bash ./bin/py/pip-dev-install.sh
+      - save_cache: # save venv as cache
+          {% raw -%}
+          key: venv-cache-{{ checksum "requirements.txt" }} # dynamic cache key
+          {% endraw %}
+          paths:
+            - /home/circleci/venvs/python/{{ cookiecutter._dev_py_ver_full }}/{{ cookiecutter.package_name }}_venv
+
+  run-test:
+    executor: python-docker
+    working_directory: ~/repo
+    steps:
+      # use ``- attach_workspace:`` and ``- restore_cache:`` in rest of your jobs, do not think of using yaml anchor for this, because yaml anchoro doesn't support array / list.
+      - attach_workspace: # restore repository codes, avoid re-checkout
+          at: ~/
+      - restore_cache: # restore venv cache
+          keys:
+            {% raw -%}
+            - venv-cache-{{ checksum "requirements.txt" }} # dynamic cache key
+            {% endraw %}
+      - run: pwd
+      - run: ls
+      # install additional test dependencies
+      - run: bash ./bin/py/req-dev.sh
+      - run: bash ./bin/py/req-test.sh
+      # run code coverage test
+      - run: bash ./config/switch-and-init.sh test
+      - run: bash ./bin/py/test-cov.sh
+workflows:
+  my-workflow:
+    jobs:
+      - checkout-source-code
+      - setup-python-virtualenv:
+          requires:
+            - checkout-source-code
+          context: your-context-name-here
+      - run-test:
+          requires:
+            - setup-python-virtualenv
+          context: your-context-name-here
