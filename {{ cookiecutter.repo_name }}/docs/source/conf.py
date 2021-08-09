@@ -106,7 +106,7 @@ html_theme = "furo"
 
 html_theme_options = {
     "sidebar_hide_name": False,
-    "dark_logo": "cottonformation-logo.png",
+    "dark_logo": "{{ cookiecutter.package_name }}-logo.png",
 }
 pygments_dark_style = "monokai"
 
