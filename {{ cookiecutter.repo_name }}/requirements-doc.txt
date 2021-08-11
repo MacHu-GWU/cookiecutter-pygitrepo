@@ -1,7 +1,7 @@
 sphinx==3.5.4
 
 # Theme
-furo==2021.6.18b36
+furo==2021.6.18b36                      # sphinx-theme
 
 # Extensions
 sphinx-inline-tabs==2021.3.28b7         # allow inline tab
@@ -12,4 +12,4 @@ rstobj==0.0.7                           # generate list table from data
 
 # Other
 
-pygments            # live RestructuredText preview
+Pygments==2.9.0                         # live RestructuredText preview
