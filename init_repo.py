@@ -53,7 +53,7 @@ class Arguments(object):
     use_pyenv_options = ["N", "Y"]
     use_pyenv_default = use_pyenv_options[0]
 
-    cicd_service_options = ["NO CI", "TRAVIS", "CIRCLECI"]
+    cicd_service_options = ["NO CI", "TRAVIS", "CIRCLECI", "GITHUB"]
     cicd_service_default = cicd_service_options[0]
 
     doc_service_options = ["NO DOC", "RTD", "S3"]

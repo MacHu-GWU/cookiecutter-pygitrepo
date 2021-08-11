@@ -51,7 +51,7 @@ jobs:
           pip install -r requirements-test.txt
           pip install .
       - name: "Run pytest"
-        run: "python -m pytest tests --cov=cottonformation"
+        run: "python -m pytest tests --cov={{ cookiecutter.package_name }}"
 
       - name: "Upload coverage to Codecov"
         if: "contains(env.USING_COVERAGE, matrix.python-version)"

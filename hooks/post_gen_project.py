@@ -70,7 +70,10 @@ if __name__ == '__main__':
     if "{{ cookiecutter.cicd_service|upper }}" != "CIRCLECI":
         remove_file_or_dir(".circleci")
 
-    if "{{ cookiecutter.doc_service }}" != "RTD":
+    if "{{ cookiecutter.cicd_service|upper }}" != "GITHUB":
+        remove_file_or_dir(".github/workflows")
+
+    if "{{ cookiecutter.doc_service|upper }}" != "RTD":
         remove_file_or_dir("readthedocs.yml")
 
     if "{{ cookiecutter.want_devops_tools }}" != "Y":
