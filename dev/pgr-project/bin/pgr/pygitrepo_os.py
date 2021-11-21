@@ -26,5 +26,12 @@ IS_JAVA = OS_NAME == OSEnum.java
 if OS_NAME not in (OSEnum.windows, OSEnum.macOS, OSEnum.linux):
     raise EnvironmentError("Not supported OS: {}".format(OS_NAME))
 
+if OS_NAME == OSEnum.windows:
+    OPEN_COMMAND = "start"
+elif OS_NAME in (OSEnum.macOS, OSEnum.linux):
+    OPEN_COMMAND = "open"
+else:
+    OPEN_COMMAND = "unknown"
+
 if __name__ == "__main__":
     print(OS_NAME)

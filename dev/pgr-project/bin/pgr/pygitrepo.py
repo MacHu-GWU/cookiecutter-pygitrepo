@@ -20,7 +20,14 @@ from os.path import (
     abspath, dirname, basename, expanduser, join, exists
 )
 from pygitrepo_config import Config
-from pygitrepo_os import OS_NAME, OSEnum
+from pygitrepo_os import (
+    OS_NAME, OSEnum,
+    IS_WINDOWS, IS_MACOS, IS_LINUX, IS_JAVA,
+    OPEN_COMMAND,
+)
+
+
+PYGITREPO_UNKNOWN = "[pygitrepo] Unknown"
 
 
 class PyGitRepo(object):
@@ -45,6 +52,13 @@ class PyGitRepo(object):
         self.AWS_LAMBDA_BUILD_DOCKER_IMAGE = Config.AWS_LAMBDA_BUILD_DOCKER_IMAGE
         self.AWS_LAMBDA_BUILD_DOCKER_IMAGE_WORKSPACE_DIR = Config.AWS_LAMBDA_BUILD_DOCKER_IMAGE_WORKSPACE_DIR
         self.AWS_LAMBDA_TEST_DOCKER_IMAGE = Config.AWS_LAMBDA_TEST_DOCKER_IMAGE
+
+        self.OS_NAME = OS_NAME
+        self.IS_WINDOWS = IS_WINDOWS
+        self.IS_MACOS = IS_MACOS
+        self.IS_LINUX = IS_LINUX
+        self.IS_JAVA = IS_JAVA
+        self.OPEN_COMMAND = OPEN_COMMAND
 
     # === Code File Structure
     @property
@@ -73,9 +87,10 @@ class PyGitRepo(object):
         sys.path.append(self.DIR_PYTHON_LIB)
         try:
             from _version import __version__
+            return __version__
         except:
-            __version__ = "0.0.0"
-        return __version__
+            return PYGITREPO_UNKNOWN
+
 
     @property
     def PATH_REQUIREMENTS_FILE(self):
@@ -139,7 +154,7 @@ class PyGitRepo(object):
         try:
             return " ".join(Config.TOX_TEST_VERSIONS)
         except:
-            return ""
+            return PYGITREPO_UNKNOWN
 
     # --- sphinx doc
     @property
@@ -396,6 +411,7 @@ class PyGitRepo(object):
             self.S3_KEY_LAMBDA_DEPLOY_ROOT,
             self.PACKAGE_VERSION,
         )
+
 
 pgr = PyGitRepo()
 
