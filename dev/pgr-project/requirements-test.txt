@@ -1,0 +1,3 @@
+# dependencies for test
+pytest                                  # test framework
+pytest-cov                              # coverage test
