@@ -26,8 +26,30 @@ from pygitrepo_os import (
     OPEN_COMMAND,
 )
 
-
 PYGITREPO_UNKNOWN = "[pygitrepo] Unknown"
+
+
+def make_s3_console_url(bucket, prefix):
+    if prefix.endswith("/"):
+        s3_type = "buckets"
+    else:
+        s3_type = "object"
+    return "https://s3.console.aws.amazon.com/s3/{s3_type}/{bucket}?prefix={prefix}".format(
+        s3_type=s3_type,
+        bucket=bucket,
+        prefix=prefix
+    )
+
+
+def s3_key_join(*parts, is_dir):
+    new_parts = list()
+    for part in parts:
+        new_parts.extend([chunk for chunk in part.split("/") if chunk])
+    key = "/".join(new_parts)
+    if is_dir:
+        return key + "/"
+    else:
+        return key
 
 
 class PyGitRepo(object):
@@ -90,7 +112,6 @@ class PyGitRepo(object):
             return __version__
         except:
             return PYGITREPO_UNKNOWN
-
 
     @property
     def PATH_REQUIREMENTS_FILE(self):
@@ -244,7 +265,7 @@ class PyGitRepo(object):
         return "{}_venv".format(Config.PACKAGE_NAME)
 
     @property
-    def DIR_VENV(self):
+    def DIR_ALL_PYTHON_VERSIONED_VENV(self):
         if OS_NAME in (OSEnum.windows, OSEnum.macOS, OSEnum.linux):
             return join(
                 self.DIR_HOME,
@@ -255,10 +276,13 @@ class PyGitRepo(object):
                     Config.DEV_PY_VER_MINOR,
                     Config.DEV_PY_VER_MICRO,
                 ),
-                self.VENV_NAME,
             )
         else:
             raise ValueError
+
+    @property
+    def DIR_VENV(self):
+        return join(self.DIR_ALL_PYTHON_VERSIONED_VENV, self.VENV_NAME)
 
     @property
     def DIR_VENV_SITE_PACKAGES(self):
@@ -363,7 +387,7 @@ class PyGitRepo(object):
             return ""
 
     @property
-    def AWS_CLI_PROFILE_ARG_AWS_LAMBDA(self):
+    def AWS_CLI_PROFILE_ARG_LAMBDA_DEPLOY(self):
         if Config.AWS_LAMBDA_DEPLOY_AWS_PROFILE:
             return Config.AWS_LAMBDA_DEPLOY_AWS_PROFILE
         else:
@@ -391,25 +415,106 @@ class PyGitRepo(object):
         return join(self.DIR_LAMBDA_BUILD, "layer.zip")
 
     @property
-    def URL_S3_CONSOLE_LAMBDA_DEPLOY_ROOT(self):
-        return "https://s3.console.aws.amazon.com/s3/buckets/{}/lambda/{}/{}/".format(
-            Config.AWS_LAMBDA_DEPLOY_S3_BUCKET,
-            Config.GITHUB_ACCOUNT,
-            Config.GITHUB_REPO_NAME,
+    def S3_KEY_LAMBDA_DEPLOY_DIR(self):
+        return s3_key_join(
+            "lambda",
+            self.PACKAGE_NAME,
+            is_dir=True,
         )
 
     @property
-    def S3_KEY_LAMBDA_DEPLOY_ROOT(self):
-        return "lambda/{}/{}".format(
-            Config.GITHUB_ACCOUNT,
-            Config.GITHUB_REPO_NAME,
-        )
-
-    @property
-    def S3_KEY_LAMBDA_DEPLOY_ROOT_VERSIONED(self):
-        return "{}/{}".format(
-            self.S3_KEY_LAMBDA_DEPLOY_ROOT,
+    def S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR(self):
+        return s3_key_join(
+            self.S3_KEY_LAMBDA_DEPLOY_DIR,
             self.PACKAGE_VERSION,
+            is_dir=True,
+        )
+
+    @property
+    def S3_URI_LAMBDA_DEPLOY_VERSIONED_DIR(self):
+        return "s3://{bucket}/{key}".format(
+            bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
+            key=self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+        )
+
+    @property
+    def S3_URI_LAMBDA_DEPLOY_VERSIONED_SOURCE_DIR(self):
+        return "s3://{bucket}/{key}".format(
+            bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
+            key=s3_key_join(
+                self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+                "source",
+                is_dir=True,
+            ),
+        )
+
+    @property
+    def S3_URI_LAMBDA_DEPLOY_VERSIONED_LAYER_DIR(self):
+        return "s3://{bucket}/{key}".format(
+            bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
+            key=s3_key_join(
+                self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+                "layer",
+                is_dir=True,
+            ),
+        )
+
+    @property
+    def S3_URI_LAMBDA_DEPLOY_VERSIONED_DEPLOY_PKG_DIR(self):
+        return "s3://{bucket}/{key}".format(
+            bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
+            key=s3_key_join(
+                self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+                "deploy-pkg",
+                is_dir=True,
+            ),
+        )
+
+    @property
+    def URL_S3_CONSOLE_LAMBDA_DEPLOY_DIR(self):
+        return make_s3_console_url(
+            bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
+            prefix=self.S3_KEY_LAMBDA_DEPLOY_DIR,
+        )
+
+    @property
+    def URL_S3_CONSOLE_LAMBDA_DEPLOY_VERSIONED_DIR(self):
+        return make_s3_console_url(
+            bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
+            prefix=self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+        )
+
+    @property
+    def URL_S3_CONSOLE_LAMBDA_DEPLOY_VERSIONED_SOURCE_OBJ(self):
+        return make_s3_console_url(
+            bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
+            prefix=s3_key_join(
+                self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+                "source",
+                is_dir=False,
+            ),
+        )
+
+    @property
+    def URL_S3_CONSOLE_LAMBDA_DEPLOY_VERSIONED_LAYER_OBJ(self):
+        return make_s3_console_url(
+            bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
+            prefix=s3_key_join(
+                self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+                "layer",
+                is_dir=False,
+            ),
+        )
+
+    @property
+    def URL_S3_CONSOLE_LAMBDA_DEPLOY_VERSIONED_DEPLOY_PKG_OBJ(self):
+        return make_s3_console_url(
+            bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
+            prefix=s3_key_join(
+                self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+                "deploy-pkg",
+                is_dir=False,
+            ),
         )
 
 
