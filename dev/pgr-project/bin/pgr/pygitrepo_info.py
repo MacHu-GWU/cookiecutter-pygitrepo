@@ -13,7 +13,7 @@ Usage::
 
 from __future__ import print_function, unicode_literals
 from os.path import exists
-from colorama import Fore, Style
+from pygitrepo_print import Fore, Style
 from pygitrepo_config import Config
 from pygitrepo import pgr
 

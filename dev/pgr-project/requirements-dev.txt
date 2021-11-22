@@ -1,3 +1,5 @@
+# This requirements file should only include dependencies that could help
+# development
 pathlib_mate                        # auto pep8 your code
 twine                               # make distribution archive
 wheel                               # make pre-compiled distribution package

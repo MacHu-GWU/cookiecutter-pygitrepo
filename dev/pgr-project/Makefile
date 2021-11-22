@@ -96,7 +96,7 @@ clean-doc: ## ** Delete recently built Html document
 
 #--- Other ---
 reformat: req-dev ## ** Pep8 Format Python Source Code
-	bash ./bin/py/reformat-python-code.sh
+	bash ./bin/py/reformat_pep8_code_style.sh
 
 
 publish: req-dev pip-dev-install ## ** Publish This Package to PyPI
@@ -141,7 +141,7 @@ lbd-upload-layer: ## Upload lambda dependencies layer to s3
 
 
 lbd-upload-source: ## Upload lambda source code to s3
-	bash ./bin/lbd/upload-lbd-source.sh
+	bash ./bin/lbd/upload-lbd-source-code.sh
 
 
 lbd-upload-everything: ## Upload lambda deployment package, layer, and source code to s3
@@ -159,15 +159,3 @@ lbd-build-upload-deploy-layer:
 
 
 lbd-bud-layer: lbd-build-upload-deploy-layer ## Build, upload, deploy lambda dependencies layer
-
-
-lbd-deploy-all-func: lbd-build-source ## Deploy all lambda funtcions
-	bash ./bin/lbd/deploy-lbd-all-func.sh
-
-
-lbd-ls-func: ## List all lambda functions in this project
-	bash ./bin/lbd/list-functions.sh
-
-
-lbd-info: ## Display Lambda Relative Info
-	bash ./bin/lbd/info-lbd.sh

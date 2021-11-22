@@ -57,6 +57,7 @@ class PyGitRepo(object):
     def __init__(self):
         self.DIR_HERE = dirname(abspath(__file__))
         self.DIR_HOME = expanduser("~")
+
         self.GITHUB_ACCOUNT = Config.GITHUB_ACCOUNT
         self.GITHUB_REPO_NAME = Config.GITHUB_REPO_NAME
         self.PACKAGE_NAME = Config.PACKAGE_NAME
@@ -64,6 +65,7 @@ class PyGitRepo(object):
         self.DEV_PY_VER_MAJOR = Config.DEV_PY_VER_MAJOR
         self.DEV_PY_VER_MINOR = Config.DEV_PY_VER_MINOR
         self.DEV_PY_VER_MICRO = Config.DEV_PY_VER_MICRO
+        self.TOX_TEST_VERSIONS = Config.TOX_TEST_VERSIONS
 
         self.DOC_HOST_RTD_PROJECT_NAME = Config.DOC_HOST_RTD_PROJECT_NAME
         self.DOC_HOST_AWS_PROFILE = Config.DOC_HOST_AWS_PROFILE
@@ -89,6 +91,18 @@ class PyGitRepo(object):
         return dirname(self.DIR_HERE)
 
     @property
+    def DIR_BIN_PGR(self):
+        return self.DIR_HERE
+
+    @property
+    def DIR_BIN_PY(self):
+        return join(self.DIR_HERE, "py")
+
+    @property
+    def DIR_BIN_LBD(self):
+        return join(self.DIR_HERE, "lbd")
+
+    @property
     def DIR_PROJECT_ROOT(self):
         return dirname(dirname(self.DIR_HERE))
 
@@ -99,7 +113,7 @@ class PyGitRepo(object):
 
     @property
     def DIR_PYTHON_LIB(self):
-        return join(self.DIR_PROJECT_ROOT, Config.PACKAGE_NAME)
+        return join(self.DIR_PROJECT_ROOT, self.PACKAGE_NAME)
 
     @property
     def PATH_VERSION_FILE(self):
@@ -174,7 +188,7 @@ class PyGitRepo(object):
     @property
     def PYENV_LOCAL_VERSIONS_FOR_TOX(self):
         try:
-            return " ".join(Config.TOX_TEST_VERSIONS)
+            return " ".join(self.TOX_TEST_VERSIONS)
         except:
             return PYGITREPO_UNKNOWN
 
@@ -269,15 +283,15 @@ class PyGitRepo(object):
     @property
     def PATH_BIN_GLOBAL_PYTHON(self):
         if OS_NAME == OSEnum.windows:
-            return "/c/Python{}.{}/python.exe".format(Config.DEV_PY_VER_MAJOR, Config.DEV_PY_VER_MINOR)
+            return "/c/Python{}.{}/python.exe".format(self.DEV_PY_VER_MAJOR, self.DEV_PY_VER_MINOR)
         elif OS_NAME in (OSEnum.macOS, OSEnum.linux):
             return join(
                 self.DIR_HOME,
                 ".pyenv",
                 "shims",
                 "python{}.{}".format(
-                    Config.DEV_PY_VER_MAJOR,
-                    Config.DEV_PY_VER_MINOR,
+                    self.DEV_PY_VER_MAJOR,
+                    self.DEV_PY_VER_MINOR,
                 )
             )
         else:
@@ -296,9 +310,9 @@ class PyGitRepo(object):
                 "venvs",
                 "python",
                 "{}.{}.{}".format(
-                    Config.DEV_PY_VER_MAJOR,
-                    Config.DEV_PY_VER_MINOR,
-                    Config.DEV_PY_VER_MICRO,
+                    self.DEV_PY_VER_MAJOR,
+                    self.DEV_PY_VER_MINOR,
+                    self.DEV_PY_VER_MICRO,
                 ),
             )
         else:
@@ -466,42 +480,54 @@ class PyGitRepo(object):
         )
 
     @property
+    def S3_KEY_LAMBDA_DEPLOY_VERSIONED_SOURCE_DIR(self):
+        return s3_key_join(
+            parts=[
+                self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+                "source",
+            ],
+            is_dir=True,
+        )
+
+    @property
     def S3_URI_LAMBDA_DEPLOY_VERSIONED_SOURCE_DIR(self):
         return "s3://{bucket}/{key}".format(
             bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
-            key=s3_key_join(
-                parts=[
-                    self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
-                    "source",
-                ],
-                is_dir=True,
-            ),
+            key=self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_SOURCE_DIR,
+        )
+
+    @property
+    def S3_KEY_LAMBDA_DEPLOY_VERSIONED_LAYER_DIR(self):
+        return s3_key_join(
+            parts=[
+                self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+                "layer",
+            ],
+            is_dir=True,
         )
 
     @property
     def S3_URI_LAMBDA_DEPLOY_VERSIONED_LAYER_DIR(self):
         return "s3://{bucket}/{key}".format(
             bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
-            key=s3_key_join(
-                parts=[
-                    self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
-                    "layer",
-                ],
-                is_dir=True,
-            ),
+            key=self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_LAYER_DIR,
+        )
+
+    @property
+    def S3_KEY_LAMBDA_DEPLOY_VERSIONED_DEPLOY_PKG_DIR(self):
+        return s3_key_join(
+            parts=[
+                self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+                "deploy-pkg",
+            ],
+            is_dir=True,
         )
 
     @property
     def S3_URI_LAMBDA_DEPLOY_VERSIONED_DEPLOY_PKG_DIR(self):
         return "s3://{bucket}/{key}".format(
             bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
-            key=s3_key_join(
-                parts=[
-                    self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
-                    "deploy-pkg",
-                ],
-                is_dir=True,
-            ),
+            key=self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DEPLOY_PKG_DIR,
         )
 
     @property
@@ -555,6 +581,12 @@ class PyGitRepo(object):
                 ],
                 is_dir=False,
             ),
+        )
+
+    @property
+    def URL_LBD_LAYER_CONSOLE(self):
+        return "https://console.aws.amazon.com/lambda/home?#/layers/{layer_name}".format(
+            layer_name=self.PACKAGE_NAME
         )
 
 

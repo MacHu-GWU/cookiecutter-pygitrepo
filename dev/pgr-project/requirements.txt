@@ -1,1 +1,4 @@
+# This requirements file should only include minimal dependencies
+# to run this library
 six
+configirl

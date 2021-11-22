@@ -18,10 +18,6 @@ dir_bin="$(dirname "${dir_here}")"
 dir_project_root=$(dirname "${dir_bin}")
 source "${dir_bin}/source/bash-helpers.sh"
 
-# colored printer helper function
-pprint() {
-    python "${dir_bin}/pgr/pygitrepo_print.py" "$1"
-}
 
 # Create virtualenv for python package development
 venv_up() {

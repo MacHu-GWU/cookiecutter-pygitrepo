@@ -3,6 +3,14 @@
 #
 # This script should be sourced to use.
 
+if [ -n "${BASH_SOURCE}" ]
+then
+    dir_here="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+else
+    dir_here="$( cd "$(dirname "$0")" ; pwd -P )"
+fi
+
+dir_bin="$(dirname "${dir_here}")"
 
 # test if a command is installed in your system
 # usage:
@@ -52,4 +60,10 @@ ensure_not_exists() {
         echo "${1} already exists!"
         exit 1
     fi
+}
+
+
+# colored printer helper function
+pprint() {
+    python "${dir_bin}/pgr/pygitrepo_print.py" "$1"
 }
