@@ -5,6 +5,6 @@
 
 include *.txt
 include *.rst
-recursive-include my_pkg *.*
+recursive-include pgr *.*
 recursive-exclude *.pyc
 recursive-exclude *.pyo

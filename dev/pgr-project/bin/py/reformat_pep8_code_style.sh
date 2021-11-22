@@ -4,4 +4,4 @@
 dir_here="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 dir_bin="$(dirname "${dir_here}")"
 source "${dir_bin}/source/python-dev.sh"
-publish_to_pypi
+reformat_pep8_code_style

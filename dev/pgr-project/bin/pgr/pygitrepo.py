@@ -14,6 +14,7 @@ Usage:
     # example
     $ python pygitrepo.py DIR_PROJECT_ROOT
 """
+
 from __future__ import unicode_literals
 import sys
 from os.path import (
@@ -41,7 +42,7 @@ def make_s3_console_url(bucket, prefix):
     )
 
 
-def s3_key_join(*parts, is_dir):
+def s3_key_join(parts, is_dir):
     new_parts = list()
     for part in parts:
         new_parts.extend([chunk for chunk in part.split("/") if chunk])
@@ -212,33 +213,56 @@ class PyGitRepo(object):
 
     @property
     def URL_S3_DOC_LATEST(self):
-        return "https://{}.s3.amazonaws.com/docs/{}/latest/".format(
-            Config.DOC_HOST_S3_BUCKET,
-            Config.PACKAGE_NAME,
+        return "https://{bucket}.s3.amazonaws.com/docs/{package_name}/latest/".format(
+            bucket=self.DOC_HOST_S3_BUCKET,
+            package_name=self.PACKAGE_NAME,
         )
 
     @property
     def URL_S3_DOC_VERSIONED(self):
-        return "https://{}.s3.amazonaws.com/docs/{}/{}/index.html".format(
-            Config.DOC_HOST_S3_BUCKET,
-            Config.PACKAGE_NAME,
-            self.PACKAGE_VERSION,
+        return "https://{bucket}.s3.amazonaws.com/docs/{package_name}/{version}/index.html".format(
+            bucket=self.DOC_HOST_S3_BUCKET,
+            package_name=self.PACKAGE_NAME,
+            version=self.PACKAGE_VERSION,
         )
 
     @property
     def S3_URI_DOC_DIR_LATEST(self):
-        return "s3://{}/docs/{}/latest".format(
-            Config.DOC_HOST_S3_BUCKET,
-            Config.PACKAGE_NAME,
-            self.PACKAGE_VERSION,
+        return "s3://{bucket}/docs/{package_name}/latest".format(
+            bucket=self.DOC_HOST_S3_BUCKET,
+            package_name=self.PACKAGE_NAME,
         )
 
     @property
     def S3_URI_DOC_DIR_VERSIONED(self):
-        return "s3://{}/docs/{}/{}".format(
-            Config.DOC_HOST_S3_BUCKET,
-            Config.PACKAGE_NAME,
-            self.PACKAGE_VERSION,
+        return "s3://{bucket}/docs/{package_name}/{version}".format(
+            bucket=self.DOC_HOST_S3_BUCKET,
+            package_name=self.PACKAGE_NAME,
+            version=self.PACKAGE_VERSION,
+        )
+
+    @property
+    def URL_S3_CONSOLE_LATEST_DOC_DIR(self):
+        return make_s3_console_url(
+            bucket=self.DOC_HOST_S3_BUCKET,
+            prefix=s3_key_join(
+                parts=[
+                    "docs", self.PACKAGE_NAME, "latest"
+                ],
+                is_dir=True,
+            )
+        )
+
+    @property
+    def URL_S3_CONSOLE_VERSIONED_DOC_DIR(self):
+        return make_s3_console_url(
+            bucket=self.DOC_HOST_S3_BUCKET,
+            prefix=s3_key_join(
+                parts=[
+                    "docs", self.PACKAGE_NAME, self.PACKAGE_VERSION
+                ],
+                is_dir=True,
+            )
         )
 
     # === Pyenv
@@ -417,16 +441,20 @@ class PyGitRepo(object):
     @property
     def S3_KEY_LAMBDA_DEPLOY_DIR(self):
         return s3_key_join(
-            "lambda",
-            self.PACKAGE_NAME,
+            parts=[
+                "lambda",
+                self.PACKAGE_NAME,
+            ],
             is_dir=True,
         )
 
     @property
     def S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR(self):
         return s3_key_join(
-            self.S3_KEY_LAMBDA_DEPLOY_DIR,
-            self.PACKAGE_VERSION,
+            parts=[
+                self.S3_KEY_LAMBDA_DEPLOY_DIR,
+                self.PACKAGE_VERSION,
+            ],
             is_dir=True,
         )
 
@@ -442,8 +470,10 @@ class PyGitRepo(object):
         return "s3://{bucket}/{key}".format(
             bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
             key=s3_key_join(
-                self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
-                "source",
+                parts=[
+                    self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+                    "source",
+                ],
                 is_dir=True,
             ),
         )
@@ -453,8 +483,10 @@ class PyGitRepo(object):
         return "s3://{bucket}/{key}".format(
             bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
             key=s3_key_join(
-                self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
-                "layer",
+                parts=[
+                    self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+                    "layer",
+                ],
                 is_dir=True,
             ),
         )
@@ -464,8 +496,10 @@ class PyGitRepo(object):
         return "s3://{bucket}/{key}".format(
             bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
             key=s3_key_join(
-                self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
-                "deploy-pkg",
+                parts=[
+                    self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+                    "deploy-pkg",
+                ],
                 is_dir=True,
             ),
         )
@@ -489,8 +523,10 @@ class PyGitRepo(object):
         return make_s3_console_url(
             bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
             prefix=s3_key_join(
-                self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
-                "source",
+                parts=[
+                    self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+                    "source",
+                ],
                 is_dir=False,
             ),
         )
@@ -500,8 +536,10 @@ class PyGitRepo(object):
         return make_s3_console_url(
             bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
             prefix=s3_key_join(
-                self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
-                "layer",
+                parts=[
+                    self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+                    "layer",
+                ],
                 is_dir=False,
             ),
         )
@@ -511,8 +549,10 @@ class PyGitRepo(object):
         return make_s3_console_url(
             bucket=self.AWS_LAMBDA_DEPLOY_S3_BUCKET,
             prefix=s3_key_join(
-                self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
-                "deploy-pkg",
+                parts=[
+                    self.S3_KEY_LAMBDA_DEPLOY_VERSIONED_DIR,
+                    "deploy-pkg",
+                ],
                 is_dir=False,
             ),
         )

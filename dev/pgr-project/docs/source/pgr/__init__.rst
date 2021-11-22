@@ -1,7 +1,7 @@
-my_pkg
-======
+pgr
+===
 
-.. automodule:: my_pkg
+.. automodule:: pgr
     :members:
 
 sub packages and modules

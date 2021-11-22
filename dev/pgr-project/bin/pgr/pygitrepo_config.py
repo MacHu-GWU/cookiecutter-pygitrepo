@@ -12,7 +12,7 @@ class Config:
     DEV_PY_VER_MINOR = "8"
     DEV_PY_VER_MICRO = "11"
     TOX_TEST_VERSIONS = [
-        "2.7.8",
+        "2.7.18",
         "3.8.11",
         "3.9.6",
     ]
