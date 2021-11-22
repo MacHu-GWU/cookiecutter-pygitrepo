@@ -18,39 +18,12 @@ dir_bin="$(dirname "${dir_here}")"
 dir_project_root=$(dirname "${dir_bin}")
 source "${dir_bin}/source/bash-helpers.sh"
 
-#--- read variable value from ${dir_bin}/pgr/pygitrepo.py file
-# git repo
-
-
-#dir_unit_test="$(python "${dir_bin}/pgr/pygitrepo.py" "DIR_UNIT_TESTS")"
-#
-#dir_sphinx_doc="$(python "${dir_bin}/pgr/pygitrepo.py" "DIR_SPHINX_DOC")"
-#dir_sphinx_doc_source="$(python "${dir_bin}/pgr/pygitrepo.py" "DIR_SPHINX_DOC_SOURCE")"
-#dir_sphinx_doc_build_html="$(python "${dir_bin}/pgr/pygitrepo.py" "DIR_SPHINX_DOC_BUILD_HTML")"
-#path_sphinx_doc_build_html_index="$(python "${dir_bin}/pgr/pygitrepo.py" "PATH_SPHINX_DOC_BUILD_HTML_INDEX")"
-#
-## virtualenv
-#dir_all_python_versioned_venv="$(python "${dir_bin}/pgr/pygitrepo.py" "DIR_ALL_PYTHON_VERSIONED_VENV")"
-
-#
-
-#bin_python="$(python "${dir_bin}/pgr/pygitrepo.py" "PATH_VENV_BIN_PYTHON")"
-
-#bin_activate="$(python "${dir_bin}/pgr/pygitrepo.py" "PATH_VENV_BIN_ACTIVATE")"
-#bin_pytest="$(python "${dir_bin}/pgr/pygitrepo.py" "PATH_VENV_BIN_PYTEST")"
-#
-#open_command="$(python "${dir_bin}/pgr/pygitrepo.py" "OPEN_COMMAND")"
-
-
+# colored printer helper function
 pprint() {
     python "${dir_bin}/pgr/pygitrepo_print.py" "$1"
 }
 
-
-
-#---
-
-
+# Create virtualenv for python package development
 venv_up() {
     dir_venv="$(python "${dir_bin}/pgr/pygitrepo.py" "DIR_VENV")"
     bin_global_python="$(python "${dir_bin}/pgr/pygitrepo.py" "PATH_BIN_GLOBAL_PYTHON")"
@@ -66,6 +39,7 @@ venv_up() {
     fi
 }
 
+# Remove virtualenv
 venv_remove() {
     dir_venv="$(python "${dir_bin}/pgr/pygitrepo.py" "DIR_VENV")"
 
