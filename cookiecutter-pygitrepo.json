@@ -1,0 +1,48 @@
+{
+    // the python package name, use lowercase, digits, and underscore only
+    // this would be the name for ``pip install ${package_name}``
+    "package_name": "pgr",
+    // your GitHub username, this will be used to generate badge links
+    "github_username": "MacHu-GWU",
+    // your GitHub username, this will be used to generate badge links
+    "repo_name": "pgr-project",
+    // the Package author's name, this will be used to generate LICENSE file
+    "author_name": "Sanhe Hu",
+    // the Package author's name, this will be used to generate LICENSE file
+    "author_email": "husanhe@gmail.com",
+    // choose if you want to include command line interface
+    "has_command_line_interface": false, // true, false
+    // choose list of python version you want to support, this will be used
+    // to generate the tox.ini config file for multi python version matrix test
+    "supported_python_versions": [
+        "3.8.11",
+        "2.7.18"
+    ],
+    // choose the CI test service you want to use, leave empty string
+    // if you don't use CI
+    "cicd_service": "github", // "github" or "circleci" or ""
+
+    // choose the doc host service you want to use, leave empty string
+    // if you don't use doc host service
+    // rtd = https://readthedocs.org/
+    // s3 = AWS S3 https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html
+    "doc_service": "rtd", // "rtd" or "s3" or ""
+    // leave empty if not using rtd for doc host
+    "rtd_project_name": "pgr",
+    // leave empty if not using AWS S3 for doc host
+    "doc_host_aws_profile_name": "",
+    "doc_host_s3_bucket_name": "aws-data-lab-sanhe-for-everything",
+
+    // choose if it is an AWS chalice project, the best practice for
+    // microservices development on AWS using Python
+    "is_aws_chalice_project": true, // true or false
+    "aws_lambda_deploy_aws_profile": "",
+    "aws_lambda_deploy_s3_bucket_name": "aws-data-lab-sanhe-for-everything",
+
+    // choose if it is an AWS cottonformation project, the best practice for
+    // infrastructure as code development on AWS using Python
+    "is_aws_cottonformation_project": false, // true or false
+    "aws_cloudformation_deploy_aws_profile": "",
+    // PLEASE IGNORE THIS, THIS IS JUST A PLACE HOLDER
+    "_please_ignore_this": null
+}

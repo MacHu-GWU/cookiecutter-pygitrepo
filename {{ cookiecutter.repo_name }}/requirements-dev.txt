@@ -1,13 +1,4 @@
-pathlib_mate                    # autopep8 your code
-twine==3.4.2                    # make distribution archive
-wheel==0.37.0                   # make pre-compiled distribution package
-configirl==0.0.10               # centralized config management
-
-{%- if cookiecutter.is_aws_project == "Y" %}
-# AWS
-boto3                           # AWS Python SDK
-{%- endif %}
-
-{%- if cookiecutter.is_aws_cloudformation_project == "Y" %}
-cottonformation                 # CloudFormation SDK
-{%- endif %}
+# This requirements file should only include dependencies for development
+pathlib_mate                            # autopep8 your code
+twine                                   # make distribution archive
+wheel                                   # make pre-compiled distribution package

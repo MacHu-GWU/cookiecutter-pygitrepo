@@ -26,7 +26,7 @@ jobs:
           command: |
             sudo pip install -r requirements.txt # install cookiecutter
             cd ./tests
-            bash ./e1_pypi_library_test.sh
+#            bash ./e1_pypi_library_test.sh
           no_output_timeout: "30s"
 
   # AWS Lambda Microservice Project with mature CI/CD
@@ -40,7 +40,7 @@ jobs:
           command: |
             sudo pip install -r requirements.txt # install cookiecutter
             cd ./tests
-            bash ./e99_serverless_project.sh
+#            bash ./e99_serverless_project.sh
           no_output_timeout: "120s"
 
 

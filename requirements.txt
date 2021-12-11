@@ -1,1 +1,3 @@
 cookiecutter
+attrs
+pathlib_mate

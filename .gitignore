@@ -1,10 +1,9 @@
 # User Settings
-learn_cc-project/
-learn_awslambda-project/
-tests/*/
-bin/*
+cookiecutter_pygitrepo_venv/
+cookiecutter_pygitrepo.egg-info/
+cookiecutter_pygitrepo-*/
+cookiecutter.json
 tmp/*
-
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

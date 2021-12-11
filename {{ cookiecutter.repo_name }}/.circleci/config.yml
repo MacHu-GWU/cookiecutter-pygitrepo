@@ -3,7 +3,7 @@ version: 2.1
 executors:
   python-docker:
     docker:
-      - image: cimg/python:{{ cookiecutter._dev_py_ver_full }}
+      - image: cimg/python:{{ cookiecutter.dev_py_ver_full }}
 
 jobs:
   checkout-source-code:
@@ -42,7 +42,7 @@ jobs:
           key: venv-cache-{{ checksum "requirements.txt" }} # dynamic cache key
           {% endraw %}
           paths:
-            - /home/circleci/venvs/python/{{ cookiecutter._dev_py_ver_full }}/{{ cookiecutter.package_name }}_venv
+            - /home/circleci/venvs/python/{{ cookiecutter.dev_py_ver_full }}/{{ cookiecutter.package_name }}_venv
 
   run-test:
     executor: python-docker
@@ -62,7 +62,6 @@ jobs:
       - run: bash ./bin/py/req-dev.sh
       - run: bash ./bin/py/req-test.sh
       # run code coverage test
-      - run: bash ./config/switch-and-init.sh test
       - run: bash ./bin/py/test-cov.sh
 workflows:
   my-workflow:

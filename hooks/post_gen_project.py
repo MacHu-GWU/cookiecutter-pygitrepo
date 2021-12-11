@@ -1,94 +1,69 @@
 # -*- coding: utf-8 -*-
 
 import os
-import shutil
+import json
+from pathlib_mate import Path
+from cookiecutter_pygitrepo.config import Config
+from cookiecutter_pygitrepo.helpers import strip_comments
 
-REPO_DIR = os.path.realpath(os.path.curdir)
+repo_dir = os.getcwd()
+path_cookiecutter_pygitrepo_json = Path("{{ cookiecutter.path_cookiecutter_pygitrepo_json }}")
+config_data = json.loads(strip_comments(path_cookiecutter_pygitrepo_json.read_text()))
+del config_data["_please_ignore_this"]
+config = Config(**config_data)
 
+help_msg = """
+Things to do next after generated the project skeleton:
 
-def remove_file_or_dir(*parts):
-    """
+- Update ``{{ cookiecutter.repo_name }}/AUTHORS.rst`` file for Author information
+- Update ``{{ cookiecutter.repo_name }}/LICENSE.txt`` and ``__license__`` variable in
+    ``{{ cookiecutter.repo_name }}/{{ cookiecutter.package_name }}/__init__.py`` (It uses MIT by default).
+    If you don't know how to choose an open source license,
+    read this https://choosealicense.com/ .
+""".strip()
+print(help_msg)
 
-    :param parts: relpath of repository directory.
-    """
-    abspath = os.path.join(REPO_DIR, *parts)
-    if os.path.isfile(abspath):
-        os.remove(abspath)
-    elif os.path.isdir(abspath):
-        shutil.rmtree(abspath)
+msg = """
+- If you choose to use CircleCI for CI/CD, you can update the
+    ``{{ cookiecutter.repo_name }}/.circleci/config.yml`` file to customize
+    CI/CD workflow. The auto-generated one should works out-of the box.
+""".strip()
+if config.cicd_service == config.CICDServiceEnum.circleci:
+    print(msg)
 
-help_msg = \
-"""
-Things to do Next after generated the project skeleton:
+msg = """
+- If you choose to use GitHubCI for CI/CD, you can update the
+    ``{{ cookiecutter.repo_name }}/.github/workflows/main.yml`` file to customize
+    CI/CD workflow. The auto-generated one should works out-of the box.
+""".strip()
+if config.cicd_service == config.CICDServiceEnum.github:
+    print(msg)
 
-    - Update ``{{ cookiecutter.repo_name }}/AUTHORS.rst`` file for credit information
-    - Update ``{{ cookiecutter.repo_name }}/LICENSE.txt`` and ``__license__`` variable in 
-        ``{{ cookiecutter.repo_name }}/{{ cookiecutter.package_name }}/__init__.py`` (It uses MIT by default). 
-        If you don't know how to choose an open source license, 
-        read this https://choosealicense.com/ .
-    - Use ``$ cd ./{{ cookiecutter.repo_name }}`` then ``$ make`` to spin up
-        your Python virtual environment for development. Type ``$ make`` for more info. 
-    {%- if cookiecutter.cicd_service|upper == "TRAVIS" %}
-    - If you choose to use TravisCI for CI/CD, you can update the
-        ``{{ cookiecutter.repo_name }}/.travis.yml`` file to customize 
-        CI/CD workflow. The auto-generated one should works out-of the box. 
-    {%- endif %}
-    {%- if cookiecutter.cicd_service|upper == "CIRCLECI" %}
-    - If you choose to use CircleCI for CI/CD, you can update the
-        ``{{ cookiecutter.repo_name }}/.circleci/config.yml`` file to customize 
-        CI/CD workflow. The auto-generated one should works out-of the box.
-    {%- endif %}
-    {%- if cookiecutter.is_aws_project == "Y" %}
-    - If it is a AWS project, update ``{{ cookiecutter.repo_name }}/config/00-config-shared.json`` 
-        config file to to use your AWS profile, region, account_id.
-    {%- endif %}
-    {%- if cookiecutter.is_aws_cloudformation_project == "Y" %}
-    - If you need to deploy your app to AWS, update the 
-        ``{{ cookiecutter.repo_name }}/{{ cookiecutter.repo_name }}/cf/__init__.py``
-        file to customize the CloudFormation template. And then you can deploy
-        from ``{{ cookiecutter.repo_name }}/devops/deploy_cf_example.py`` script.
-    {%- endif %}
-    {%- if cookiecutter.is_aws_lambda_project == "Y" %}
-    - If it is a Microservice project on AWS, update the 
-        ``{{ cookiecutter.repo_name }}/serverless.yml`` file to customize 
-        your microservice settings.
-        And you should implement your microservice logic in 
-        ``{{ cookiecutter.repo_name }}/{{ cookiecutter.repo_name }}/handlers``
-        by your self. The default code skeleton gives you the best practice
-        of microservice development.
-    {%- endif %}
-"""
-
+msg = """
+- If it is a Microservice project on AWS, update the
+    ``{{ cookiecutter.repo_name }}/lambda_app/.chalice/config.json`` file 
+    to customizeyour microservice settings. And you should implement 
+    your microservice logic in ``{{ cookiecutter.repo_name }}/{{ cookiecutter.repo_name }}/lbd``
+    by yourself. The default code skeleton gives you the best practice
+    of microservice development.
+""".strip()
+if config.is_aws_chalice_project:
+    print(msg)
 
 if __name__ == '__main__':
-    if "{{ cookiecutter.has_command_line_interface }}" != "Y":
-        remove_file_or_dir("{{ cookiecutter.package_name }}", "cli.py")
+    if config.has_command_line_interface is False:
+        Path(repo_dir, config.package_name, "cli.py").remove_if_exists()
 
-    if "{{ cookiecutter.cicd_service|upper }}" != "TRAVIS":
-        remove_file_or_dir(".travis.yml")
+    if config.cicd_service != Config.CICDServiceEnum.github:
+        Path(repo_dir, ".github", "workflows").remove_if_exists()
 
-    if "{{ cookiecutter.cicd_service|upper }}" != "CIRCLECI":
-        remove_file_or_dir(".circleci")
+    if config.cicd_service != Config.CICDServiceEnum.circleci:
+        Path(repo_dir, ".circleci").remove_if_exists()
 
-    if "{{ cookiecutter.cicd_service|upper }}" != "GITHUB":
-        remove_file_or_dir(".github/workflows")
+    if config.doc_service != Config.DocServiceEnum.readthedocs:
+        Path(repo_dir, "readthedocs.yml").remove_if_exists()
 
-    if "{{ cookiecutter.doc_service|upper }}" != "RTD":
-        remove_file_or_dir("readthedocs.yml")
-
-    if "{{ cookiecutter.want_devops_tools }}" != "Y":
-        remove_file_or_dir("config")
-        remove_file_or_dir("bin/py/config-init.sh")
-        remove_file_or_dir("{{ cookiecutter.package_name }}/devops")
-
-    if "{{ cookiecutter.is_aws_cloudformation_project }}" != "Y":
-        remove_file_or_dir("{{ cookiecutter.package_name }}/cf")
-        remove_file_or_dir("devops", "deploy_cf_example.py")
-
-    if "{{ cookiecutter.is_aws_lambda_project }}" != "Y":
-        remove_file_or_dir("{{ cookiecutter.package_name }}/handlers")
-        remove_file_or_dir("bin", "lbd")
-        remove_file_or_dir("lbd-test-event.json")
-        remove_file_or_dir("serverless.yml")
-
-    print(help_msg)
+    if config.is_aws_chalice_project is False:
+        Path(repo_dir, "lambda_app").remove_if_exists()
+        Path(repo_dir, config.package_name, "lbd").remove_if_exists()
+        Path(repo_dir, "bin", "container-only-build-lambda-layer.sh").remove_if_exists()

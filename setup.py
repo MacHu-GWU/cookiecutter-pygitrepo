@@ -13,7 +13,7 @@ from datetime import date
 from setuptools import setup, find_packages
 
 # --- import your package ---
-import {{cookiecutter.package_name}} as package
+import cookiecutter_pygitrepo as package
 
 if __name__ == "__main__":
     # --- Automatically generate setup parameters ---
@@ -184,13 +184,6 @@ if __name__ == "__main__":
         license=LICENSE,
         install_requires=REQUIRES,
         extras_require=EXTRA_REQUIRE,
-        {%- if cookiecutter.has_command_line_interface is true %}
-        entry_points={
-            "console_scripts": [
-                "{{ cookiecutter.package_name }}={{ cookiecutter.package_name }}.cli:main",
-            ],
-        },
-        {%- endif %}
     )
 
 """

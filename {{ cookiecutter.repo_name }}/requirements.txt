@@ -1,3 +1,0 @@
-{%- if cookiecutter.is_aws_project == "Y" %}
-configirl==0.0.10
-{%- endif %}
