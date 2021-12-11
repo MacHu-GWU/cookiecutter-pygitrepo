@@ -27,8 +27,8 @@
     // it is the aws s3 bucket to store deployment artifacts
     "AWS_LAMBDA_DEPLOY_S3_BUCKET": "{{ cookiecutter.aws_lambda_deploy_s3_bucket_name }}",
     // it is the docker image for AWS Lambda layer build on your local machine
-    "AWS_LAMBDA_BUILD_DOCKER_IMAGE": "{{ cookiecutter.rtd_project_name }}",
+    "AWS_LAMBDA_BUILD_DOCKER_IMAGE": "{{ cookiecutter.aws_lambda_build_docker_image }}",
     // it is the working directory for temp lambda layer build in docker image
-    "AWS_LAMBDA_BUILD_DOCKER_IMAGE_WORKSPACE_DIR": "{{ cookiecutter.rtd_project_name }}"
+    "AWS_LAMBDA_BUILD_DOCKER_IMAGE_WORKSPACE_DIR": "{{ cookiecutter.aws_lambda_build_docker_image_workspace_dir }}"
 }
 

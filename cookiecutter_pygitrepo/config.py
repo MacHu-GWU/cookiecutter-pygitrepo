@@ -36,6 +36,7 @@ class Config(object):
 
     is_aws_cottonformation_project = attr.ib()  # type: bool
     aws_cloudformation_deploy_aws_profile = attr.ib()  # type: str
+    aws_cloudformation_deploy_s3_bucket_name = attr.ib()  # type: str
 
     path_cookiecutter_pygitrepo_json = attr.ib(default=None)  # type: str
 
