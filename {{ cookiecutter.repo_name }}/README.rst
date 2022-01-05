@@ -1,18 +1,18 @@
 {%- set _github_url = 'https://github.com/%(github_username)s/%(repo_name)s'|format(github_username=cookiecutter.github_username, repo_name=cookiecutter.repo_name) -%}
-{%- if cookiecutter.doc_service == 'RTD' -%}
+{%- if cookiecutter.doc_service == 'rtd' -%}
 {%- set _doc_domain = 'https://%(rtd_project_name)s.readthedocs.io'|format(rtd_project_name=cookiecutter.rtd_project_name) -%}
-{%- elif cookiecutter.doc_service == 'S3' -%}
+{%- elif cookiecutter.doc_service == 's3' -%}
 {%- set _doc_domain = 'http://%(doc_host_s3_bucket_name)s.s3.amazonaws.com/docs/%(package_name)s/latest'|format(doc_host_s3_bucket_name=cookiecutter.doc_host_s3_bucket_name, package_name=cookiecutter.package_name) -%}
 {%- else -%}
 {%- set _doc_domain = 'http://%(package_name)s.my-docs.com'|format(package_name=cookiecutter.package_name) -%}
 {%- endif -%}
-{%- if cookiecutter.doc_service == 'RTD' %}
+{%- if cookiecutter.doc_service == 'rtd' %}
 .. image:: https://readthedocs.org/projects/{{ cookiecutter.rtd_project_name }}/badge/?version=latest
     :target: {{ _doc_domain }}/index.html
     :alt: Documentation Status
 {% endif %}
-.. image:: https://travis-ci.org/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}.svg?branch=master
-    :target: https://travis-ci.org/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}?branch=master
+.. image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/workflows/CI/badge.svg
+    :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/actions?query=workflow:CI
 
 .. image:: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}
