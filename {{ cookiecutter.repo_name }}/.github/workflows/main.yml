@@ -51,8 +51,9 @@ jobs:
           pip install -r requirements-test.txt
           pip install .
       - name: "Run pytest"
+{% endraw %}
         run: "python -m pytest tests --cov={{ cookiecutter.package_name }}"
-
+{% raw -%}
       - name: "Upload coverage to Codecov"
         if: "contains(env.USING_COVERAGE, matrix.python-version)"
         uses: "codecov/codecov-action@v1" # https://github.com/marketplace/actions/codecov-action
