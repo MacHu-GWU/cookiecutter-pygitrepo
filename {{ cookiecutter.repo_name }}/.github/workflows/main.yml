@@ -20,9 +20,9 @@ jobs:
     strategy:
       matrix:
         os: ["ubuntu-latest", "windows-latest"]
-        #        os: ["ubuntu-latest", ] # for debug only
+        # os: ["ubuntu-latest", ] # for debug only
         python-version: ["3.6", "3.7", "3.8", "3.9"]
-        #        python-version: ["3.6", ] # for debug only
+        # python-version: ["3.6", ] # for debug only
         exclude:
           - os: windows-latest # this is a useless exclude rules for demonstration use only
             python-version: 2.7
@@ -53,10 +53,10 @@ jobs:
       - name: "Run pytest"
 {% endraw %}
         run: "python -m pytest tests --cov={{ cookiecutter.package_name }}"
-{% raw -%}
+{%- raw %}
       - name: "Upload coverage to Codecov"
         if: "contains(env.USING_COVERAGE, matrix.python-version)"
         uses: "codecov/codecov-action@v1" # https://github.com/marketplace/actions/codecov-action
         with:
           fail_ci_if_error: true
-{% endraw %}
+{%- endraw %}

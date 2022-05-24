@@ -1,11 +1,11 @@
 {
     // the python package name, use lowercase, digits, and underscore only
     // this would be the name for ``pip install ${package_name}``
-    "package_name": "crawler_uszipcode",
+    "package_name": "notification_service",
     // your GitHub username, this will be used to generate badge links
-    "github_username": "MacHu-GWU",
+    "github_username": "",
     // your GitHub username, this will be used to generate badge links
-    "repo_name": "crawler_uszipcode-project",
+    "repo_name": "notification_service-project",
     // the Package author's name, this will be used to generate LICENSE file
     "author_name": "Sanhe Hu",
     // the Package author's name, this will be used to generate LICENSE file
@@ -25,24 +25,24 @@
     // if you don't use doc host service
     // rtd = https://readthedocs.org/
     // s3 = AWS S3 https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html
-    "doc_service": "rtd", // "rtd" or "s3" or ""
+    "doc_service": "s3", // "rtd" or "s3" or ""
     // leave empty if not using rtd for doc host
     "rtd_project_name": "",
     // leave empty if not using AWS S3 for doc host
-    "doc_host_aws_profile_name": "",
-    "doc_host_s3_bucket_name": "",
+    "doc_host_aws_profile_name": "aws_data_lab_open_source_us_east_1",
+    "doc_host_s3_bucket_name": "501105007192-us-east-1-data",
 
     // choose if it is an AWS chalice project, the best practice for
     // microservices development on AWS using Python
     "is_aws_chalice_project": true, // true or false
-    "aws_lambda_deploy_aws_profile": "aws_data_lab_sanhe",
-    "aws_lambda_deploy_s3_bucket_name": "aws-data-lab-sanhe-for-everything",
+    "aws_lambda_deploy_aws_profile": "aws_data_lab_open_source_us_east_1",
+    "aws_lambda_deploy_s3_bucket_name": "501105007192-us-east-1-artifacts",
 
     // choose if it is an AWS cottonformation project, the best practice for
     // infrastructure as code development on AWS using Python
     "is_aws_cottonformation_project": true, // true or false
-    "aws_cloudformation_deploy_aws_profile": "aws_data_lab_sanhe",
-    "aws_cloudformation_deploy_s3_bucket_name": "aws-data-lab-sanhe-for-everything",
+    "aws_cloudformation_deploy_aws_profile": "aws_data_lab_open_source_us_east_1",
+    "aws_cloudformation_deploy_s3_bucket_name": "501105007192-us-east-1-artifacts",
 
     // PLEASE IGNORE THIS, THIS IS JUST A PLACE HOLDER
     "_please_ignore_this": null
