@@ -14,7 +14,7 @@
 .. image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/workflows/CI/badge.svg
     :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/actions?query=workflow:CI
 
-.. image:: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/branch/master/graph/badge.svg
+.. image:: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/branch/main/graph/badge.svg
     :target: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}
 
 .. image:: https://img.shields.io/pypi/v/{{ cookiecutter.package_name }}.svg
